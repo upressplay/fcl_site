@@ -1,0 +1,79 @@
+#header {
+	float: left;
+	width:90rem;
+	height:39rem;
+	margin-top: 15rem;
+	background-color: #000;
+}
+
+@media (min-width: 900px) { 
+	#header {
+		float: left;
+		width:160rem;
+		height:70rem;
+		margin-top: 8rem;
+		background-color: #000;
+	}
+}
+#site_logo {
+	position: absolute;
+	width: 60.2rem;
+	height:22.4rem;
+	top:20rem;
+	left:5rem;
+}
+
+#header_btn {
+	position: absolute;
+	width: 60rem;
+	top:32rem;
+	left:15rem;
+	color:#fff;
+	font-size: 5rem;
+	line-height: 7rem;
+	text-align: center;
+	cursor: pointer;
+}
+
+@media (min-width: 900px) { 
+	#header_btn {
+		position: absolute;
+		width: 60rem;
+		top:60rem;
+		left:50rem;
+		color:#fff;
+		font-size: 5rem;
+		line-height: 7rem;
+		text-align: center;
+		cursor: pointer;
+	}
+}
+#header_holder {
+	position:relative;
+}
+
+#header_anim {
+	position:absolute;
+}
+
+.header_anim {
+	position: absolute;
+	width:90rem;
+	height:39rem;
+}
+
+@media (min-width: 900px) { 
+	.header_anim {
+		position: absolute;
+		width:160rem;
+		height:70rem;
+	}
+}
+
+
+.header_anim img{
+	width:100%;
+	height:auto;
+}
+
+

@@ -1,0 +1,14 @@
+
+#about {
+	float: left;
+	background-color: #fff;
+	width: 90%;
+	padding: 5%;
+	text-align: center;
+}
+
+
+#about_title {
+	margin-bottom: 3rem;
+}
+

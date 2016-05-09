@@ -1,0 +1,55 @@
+
+#contact {
+	float: left;
+	background-color: #000;
+	width: 90%;
+	padding: 5%;
+}
+
+
+#contact_title {
+	margin-bottom: 3rem;
+}
+
+#contact_info {
+	float: left;
+	width:100%;
+	color:#fff;
+	font-family: Arial, san-serif;
+	font-size: 2.4rem;
+	line-height: 3rem;
+}
+
+#contact_left {
+	float: left;
+	width: 50%;
+}
+#contact_right {
+	float: left;
+	width: 50%;
+}
+
+
+#contact a:link {
+	border: none;
+	color: #fff;
+	text-decoration: none;
+}
+
+#contact a:visited {
+	border: none;
+	color: #fff;
+	text-decoration: none;
+}
+
+#contact a:active {
+	border: none;
+	color: #fff;
+	text-decoration: none;
+}
+
+#contact a:hover {
+	border: none;
+	color: #fff;
+	text-decoration: underline;
+}

@@ -1,0 +1,50 @@
+
+#instagram {
+	float: left;
+	width: 100%;
+	background-color: #000;
+}
+
+
+.white_txt_btn {
+	font-size: 5.4rem;	
+}
+
+@media (min-width: 900px) { 
+	.white_txt_btn {
+		font-size: 2.4rem;	
+	}
+}
+
+
+#instagram_title {
+	float:left;
+	padding: 1% 5% 2% 5%;
+	width: 90%;
+	background-color: #000;
+}
+
+
+#instagram_title a:link {
+	border: none;
+	color: #fff;
+	text-decoration: none;
+}
+
+#instagram_title a:visited {
+	border: none;
+	color: #fff;
+	text-decoration: none;
+}
+
+#instagram_title a:active {
+	border: none;
+	color: #fff;
+	text-decoration: none;
+}
+
+#instagram_title a:hover {
+	border: none;
+	color: #d90e0e;
+	text-decoration: underline;
+}

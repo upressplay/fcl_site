@@ -1,0 +1,169 @@
+html,
+body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	overflow: hidden;
+	font-family: 'sitefont', serif;
+	color: #000;
+	font-size: 10px;
+	word-spacing: normal;
+	letter-spacing: normal;
+	background-color: #fff;
+}
+
+body {
+	position: relative;
+}
+
+img {
+	border: 0;
+	width: 100%;
+	height: auto;
+}
+
+@media ( min-width: 700px) {
+
+	::-webkit-scrollbar {
+		width: 7px;
+	}
+	::-webkit-scrollbar-track {
+		border-radius: 0px;
+		background-color: #ccc;
+	}
+	::-webkit-scrollbar-thumb {
+		border-radius: 0px;
+		background-color: #333;
+	}
+
+}
+
+p {
+	display: block;
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 0em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+}
+
+@font-face {
+    font-family: 'sitefont';
+    src: url('fonts/jennasue-webfont.woff2') format('woff2'),
+         url('fonts/jennasue-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+a:link {
+	border: none;
+	color: #000;
+	text-decoration: none;
+}
+
+a:visited {
+	border: none;
+	color: #000;
+	text-decoration: none;
+}
+
+a:active {
+	border: none;
+	color: #000;
+	text-decoration: none;
+}
+
+a:hover {
+	border: none;
+	color: #fff;
+	text-decoration: underline;
+}
+
+
+.screen-reader-text { /* Reusable, toolbox kind of class */
+  	position: absolute;
+  	top: -9999px;
+  	left: -9999px;
+}
+
+
+#site_holder {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	display: none;
+}
+
+
+
+#site_container {
+	background-color: #fff;
+	float: left;
+	width: 100%;
+}
+
+#site_content {
+	float: left;
+	width: 100%;
+	
+}
+
+@media (min-width: 900px) { 
+	#site_content {
+		float: left;
+		width: 100%;
+		min-height: 100rem;
+	}
+}
+
+.desktop {
+	display: none;
+}
+
+.mobile {
+	display: block;
+}
+
+@media (min-width: 900px) { 
+	.desktop {
+		display: block;
+	}
+
+	.mobile {
+		display: none;
+	}
+
+}
+
+.section_title {
+	font-size: 8rem;
+	line-height: 10rem;
+	text-align: center;
+}
+@media (min-width: 900px) { 
+	.section_title {
+		font-size: 6rem;
+		line-height: 8rem;
+		text-align: center;
+	}
+}
+.black_title {
+	color: #000;
+}
+
+.blue_title {
+	color: #0079bd;
+}
+
+.white_title {
+	color: #fff;
+}
+
+.black_txt {
+	color: #000;
+	font-family: Arial, san-serif;
+	font-size: 2rem;
+	line-height: 3rem;
+}
