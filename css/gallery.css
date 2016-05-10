@@ -170,7 +170,7 @@ p {
 	width: 40%;
 	display: inline-block;
 	text-align: center;
-	padding: 1%;
+	padding: 1rem;
 	background-color: #000;
 	color: #fff;
 	font-size: 6rem;
@@ -183,11 +183,11 @@ p {
 		width: 10%;
 		display: inline-block;
 		text-align: center;
-		padding: 1%;
+		padding: 1rem;
 		background-color: #000;
 		color: #fff;
 		font-size: 4rem;
-		line-height: 5rem;
+		line-height: 4.5rem;
 		cursor: pointer;
 	}
 }

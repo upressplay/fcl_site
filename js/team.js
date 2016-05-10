@@ -48,7 +48,7 @@ site.team = {
         }
 
         site.trace("site.segments[1] = "+site.segments[1]+" site.segments[2] = "+site.segments[2]);
-        if(site.segments[1] == "team" && site.segments[2] != "") {
+        if(site.segments[1] == "castcrew" && site.segments[2] != "") {
             TweenMax.delayedCall(1, thisobj.open_team, [site.segments[2]], this);
         }
 
@@ -253,7 +253,7 @@ site.team = {
                 if(this.data[i].id == val) {
                     $('body').prepend('<div id="team_overlay"></div>');
 
-                    site.set_url("team",this.data[i].id);
+                    site.set_url("castcrew",this.data[i].id);
                     
                     
                     $('#team_overlay').append('<div id="team_nav"></div>');
@@ -276,6 +276,36 @@ site.team = {
                     $('#team_article').append('<span id="team_article_top"></span>');
                     $('#team_article_top').append('<span class="team_article_title">'+this.data[i].title+'</span>');
                     
+                    $('#team_article_top').append('<div class="team_share">Share: </div>');
+
+
+                    $('#team_article_top .team_share').append('<div entryid="'+this.data[i].id+'" type="facebook" class="team_share_btn"><span class="fa fa-facebook" aria-hidden="true" ></span><span class="screen-reader-text">Facebook</span></div>');
+
+                    $('#team_article_top .team_share').append('<div entryid="'+this.data[i].id+'" type="twitter" class="team_share_btn"><span class="fa fa-twitter" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
+
+                    $('#team_article_top .team_share').append('<div entryid="'+this.data[i].id+'" type="pinterest" class="team_share_btn"><span class="fa fa-pinterest" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
+
+                    $('#team_article_top .team_share').append('<div entryid="'+this.data[i].id+'" type="google" class="team_share_btn"><span class="fa fa-google" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
+
+
+                    $('#team_article_top .team_share').append('<div entryid="'+this.data[i].id+'" type="tumblr" class="team_share_btn"><span class="fa fa-tumblr" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
+
+                     $('.team_share_btn').click(function(event){
+                        var type = $(this).attr('type');
+                        var id = $(this).attr('entryid');
+                        thisobj.share_article(type,id);
+                    });
+                    
+                    if(site.device == "desktop") {
+                        $('.team_share_btn').mouseenter(function (event){  
+                           TweenMax.to($( this ), .25, {color:"#d90e0e", ease:"Power1.easeInOut", overwrite:2}); 
+                        });
+
+                        $('.team_share_btn').mouseleave(function (event){  
+                            TweenMax.to($( this ), .5, {color:"#000", ease:"Power1.easeInOut", overwrite:2}); 
+                        });      
+                    }
+
                     $('#team_article').append('<span class="team_article_desc">'+this.data[i].desc+'</span>');
 
          
@@ -331,7 +361,7 @@ site.team = {
 
         if(site.device == "desktop") {
             $('.team_read_more').mouseenter(function (event){  
-               TweenMax.to($( this ), .25, {color:"#fff", backgroundColor:'#333', ease:"Power1.easeInOut", overwrite:2}); 
+               TweenMax.to($( this ), .25, {color:"#fff", backgroundColor:'#d90e0e', ease:"Power1.easeInOut", overwrite:2}); 
             });
 
             $('.team_read_more').mouseleave(function (event){  

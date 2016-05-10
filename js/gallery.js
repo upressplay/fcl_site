@@ -39,6 +39,16 @@ site.gallery = {
         $('#load_more_gallery_btn').click(function(event){
             thisobj.load_more();
         });
+
+        if(site.device == "desktop") {
+            $('#load_more_gallery_btn').mouseenter(function (event){  
+               TweenMax.to($( this ), .25, {color:"#fff", backgroundColor:'#d90e0e', ease:"Power1.easeInOut", overwrite:2}); 
+            });
+
+            $('#load_more_gallery_btn').mouseleave(function (event){  
+                TweenMax.to($( this ), .5, {color:"#fff", backgroundColor:'#000', ease:"Power1.easeInOut", overwrite:2}); 
+            });      
+        }
      
         this.load_more();
         this.resize();

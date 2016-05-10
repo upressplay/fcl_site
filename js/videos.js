@@ -40,6 +40,16 @@ site.videos = {
             thisobj.load_more();
         });
      
+        if(site.device == "desktop") {
+            $('#load_more_videos_btn').mouseenter(function (event){  
+               TweenMax.to($( this ), .25, {color:"#fff", backgroundColor:'#d90e0e', ease:"Power1.easeInOut", overwrite:2}); 
+            });
+
+            $('#load_more_videos_btn').mouseleave(function (event){  
+                TweenMax.to($( this ), .5, {color:"#000", backgroundColor:'#fff', ease:"Power1.easeInOut", overwrite:2}); 
+            });      
+        }
+
         this.load_more();
         this.resize();
 

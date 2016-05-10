@@ -164,6 +164,15 @@ a:hover {
 .black_txt {
 	color: #000;
 	font-family: Arial, san-serif;
-	font-size: 2rem;
-	line-height: 3rem;
+	font-size: 3rem;
+	line-height: 4rem;
+}
+
+@media (min-width: 900px) { 
+	.black_txt {
+		color: #000;
+		font-family: Arial, san-serif;
+		font-size: 2rem;
+		line-height: 3rem;
+	}
 }

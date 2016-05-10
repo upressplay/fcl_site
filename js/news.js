@@ -278,6 +278,35 @@ site.news = {
                     $('#news_article').append('<span id="news_article_top"></span>');
                     $('#news_article_top').append('<span class="news_article_title">'+this.data[i].title+'</span>');
                     
+                    $('#news_article_top').append('<div class="news_share">Share: </div>');
+
+
+                    $('#news_article_top .news_share').append('<div entryid="'+this.data[i].id+'" type="facebook" class="news_share_btn"><span class="fa fa-facebook" aria-hidden="true" ></span><span class="screen-reader-text">Facebook</span></div>');
+
+                    $('#news_article_top .news_share').append('<div entryid="'+this.data[i].id+'" type="twitter" class="news_share_btn"><span class="fa fa-twitter" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
+
+                    $('#news_article_top .news_share').append('<div entryid="'+this.data[i].id+'" type="pinterest" class="news_share_btn"><span class="fa fa-pinterest" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
+
+                    $('#news_article_top .news_share').append('<div entryid="'+this.data[i].id+'" type="google" class="news_share_btn"><span class="fa fa-google" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
+
+
+                    $('#news_article_top .news_share').append('<div entryid="'+this.data[i].id+'" type="tumblr" class="news_share_btn"><span class="fa fa-tumblr" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
+
+                     $('.news_share_btn').click(function(event){
+                        var type = $(this).attr('type');
+                        var id = $(this).attr('entryid');
+                        thisobj.share_article(type,id);
+                    });
+                    
+                    if(site.device == "desktop") {
+                        $('.news_share_btn').mouseenter(function (event){  
+                           TweenMax.to($( this ), .25, {color:"#d90e0e", ease:"Power1.easeInOut", overwrite:2}); 
+                        });
+
+                        $('.news_share_btn').mouseleave(function (event){  
+                            TweenMax.to($( this ), .5, {color:"#000", ease:"Power1.easeInOut", overwrite:2}); 
+                        });      
+                    }
                     $('#news_article').append('<span class="news_article_desc">'+this.data[i].desc+'</span>');
 
          
@@ -333,11 +362,11 @@ site.news = {
 
         if(site.device == "desktop") {
             $('.news_read_more').mouseenter(function (event){  
-               TweenMax.to($( this ), .25, {color:"#fff", backgroundColor:'#333', ease:"Power1.easeInOut", overwrite:2}); 
+               TweenMax.to($( this ), .25, {color:"#fff", backgroundColor:'#d90e0e', ease:"Power1.easeInOut", overwrite:2}); 
             });
 
             $('.news_read_more').mouseleave(function (event){  
-                TweenMax.to($( this ), .5, {color:"#000", backgroundColor:'#fff', ease:"Power1.easeInOut", overwrite:2}); 
+                TweenMax.to($( this ), .5, {color:"#fff", backgroundColor:'#000', ease:"Power1.easeInOut", overwrite:2}); 
             });      
         }
         
