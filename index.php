@@ -114,6 +114,29 @@
 	$team_data = json_decode($team_data, true);	
 	$team_data = $team_data['data'];
 
+	$soundtrack_data  = file_get_contents('data/soundtrack.json');
+	$soundtrack_data = json_decode($soundtrack_data, true);	
+	$soundtrack_data = $soundtrack_data['data'];
+
+
+
+	if($segments[0] == "soundtrack") {
+
+		$meta_title = $meta_title_default . " : Soundtrack";
+		
+		foreach ( $soundtrack_data as $s ) {
+
+			if($segments[1] == $s['id']) {
+				$meta_title = $meta_title . " : " . $s['title'];
+				if($s['desc'] != "") $meta_desc = substr(strip_tags($s['desc']), 0, 300);
+				$meta_img  = $s['img'];
+			}	
+		}
+		
+		
+
+	}
+
 
 
 ?>
@@ -150,6 +173,7 @@
 	<link rel="stylesheet" href="/css/team.css">
 	<link rel="stylesheet" href="/css/gallery.css">
 	<link rel="stylesheet" href="/css/videos.css">
+	<link rel="stylesheet" href="/css/soundtrack.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
@@ -185,11 +209,13 @@
 		<div id="site_container">
 			<?php 
 				include 'includes/header.php';
+				include 'includes/soundtrack.php';
 				include 'includes/about.php';
 				include 'includes/videos.php';
 				include 'includes/gallery.php';
 				include 'includes/team.php';
 				include 'includes/news.php';
+
 				include 'includes/instagram.php';
 
 
@@ -231,6 +257,9 @@
 		$videos_data = json_encode($videos_data);
 		echo "site.videos_data = ". $videos_data . ";\n"; 
 
+		$soundtrack_data = json_encode($soundtrack_data);
+		echo "site.soundtrack_data = ". $soundtrack_data . ";\n"; 
+
 
 	?>
 	</script>
@@ -242,5 +271,6 @@
   	<script src="/js/team.js"></script>
   	<script src="/js/gallery.js"></script>
   	<script src="/js/videos.js"></script>
+  	<script src="/js/audio.js"></script>
 </body>
 </html>

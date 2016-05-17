@@ -12,7 +12,7 @@ site.nav = {
     new:0,
     loading:false,
     open:false,
-    scroll_urls:['/about/','/castcrew/','/gallery/', '/news/','/videos/'],
+    scroll_urls:['/about/','/castcrew/','/gallery/', '/news/','/videos/', '/soundtrack/'],
     initialize : function () {
 
         var thisobj = this;

@@ -1,0 +1,113 @@
+
+#soundtrack {
+	float: left;
+	background-color: #fff;
+	width: 100%;
+	padding: 2% 0;
+	text-align: center;
+}
+
+
+#soundtrack_title {
+	margin-bottom: 3rem;
+}
+
+#soundtrack_holder {
+	float: left;
+	width: 100%;
+	padding:0;
+}
+
+.soundtrack {
+	display: inline-block;
+	width: 90rem;
+	border: .1rem solid #888;
+	padding: 0;
+	background-color: #e1e1e1;
+	text-align: left;
+}
+
+@media (min-width: 900px) { 
+	.soundtrack {
+		width: 67rem;
+	}
+}
+
+
+.soundtrack_img {
+	width:14rem;
+	height:14rem;
+	border-right: .1rem solid #888;
+	margin-right: 3rem;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.soundtrack_info {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: left;
+	width:45rem;
+	margin: 0 .7rem 0 .3rem;
+}
+
+@media (min-width: 900px) { 
+	.soundtrack_title {
+		width:50rem;
+	}
+}
+
+.soundtrack_title {
+	font-size: 6rem;
+	line-height: 6.5rem;
+}
+
+@media (min-width: 900px) { 
+	.soundtrack_title {
+		font-size: 4rem;
+		line-height: 4.5rem;
+	}
+}
+
+.soundtrack_artist {
+	font-size: 2.5rem;
+	line-height: 2.5rem;
+	font-family: Arial, san-serif;
+}
+
+@media (min-width: 900px) { 
+	.soundtrack_title {
+		font-size: 1.5rem;
+		line-height: 1.5rem;
+	}
+}
+
+.soundtrack_link {
+	width:15rem;
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 5rem;
+	line-height: 10rem;
+	color: #000;
+	cursor: pointer;
+}
+
+@media (min-width: 900px) { 
+	.soundtrack_link {
+		width:9rem;
+		font-size: 6rem;
+		line-height: 6.5rem;
+	}
+}
+
+.soundtrack_play {
+	width:9rem;
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 6rem;
+	line-height: 7rem;
+	color: #d90e0e;
+	cursor: pointer;
+}

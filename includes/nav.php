@@ -26,6 +26,10 @@
       <div class="nav_btn">News</div>
       <!-- news --></a>
 
+      <a href="/soundtrack/" target="_self">
+      <div class="nav_btn">Soundtrack</div>
+      <!-- news --></a>
+
 
       <a href="https://www.instagram.com/6degreeschicago/" target="_blank">
       	<div type="instagram" class="social_btn">
