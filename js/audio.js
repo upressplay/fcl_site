@@ -10,6 +10,7 @@ site.audio = {
     sounds:[],
     audio_on:false,
     active:"",
+    current:0,
     initialize : function () {
 
         this.render();
@@ -77,7 +78,7 @@ site.audio = {
                 this.sounds[i].obj = audio;   
                 this.sounds[i].loaded = true;
                 if(play_now) this.play(id); 
-                this.current = this.sounds[i].id;
+                
                 return;
             }  
         }
@@ -93,17 +94,10 @@ site.audio = {
         site.trace("play_next")
 
         var i;
-        var next;
-        for (i=0;i<this.sounds.length;i++)
-        {      
-           
-            if(this.sounds[i].id == this.active) {   
-                 site.trace("this.sounds[i].id = "+this.sounds[i].id+" this.active = "+this.active+" this.sounds.length = "+this.sounds.length)
-                next = i+1;
-                //if(next > this.sounds.length-1) next = 0;
-                this.play(this.sounds[next].id);
-            }  
-        }
+        var next = this.current + 1;
+        if(next > this.sounds.length-1) next = 0;
+        this.play(this.sounds[next].id);
+    
     },
 
     play : function (id) {
@@ -111,6 +105,12 @@ site.audio = {
         if(!this.audio_on) return;
         site.trace('')
         site.trace("play id = "+id)
+
+        site.trace("this.active = "+this.active)
+        if(id == this.active) {
+            this.stop();
+            return;
+        }
 
         if(this.active != '')
         var i;
@@ -130,6 +130,7 @@ site.audio = {
                     this.active = this.sounds[i].id;
                     TweenMax.killDelayedCallsTo(this.back_btn);
                     TweenMax.delayedCall(.5, this.set_current_time, [i], this);
+                    this.current = i;
                 } else {
                     this.load(id,true);
                 }
@@ -154,6 +155,7 @@ site.audio = {
             if (this.sounds[i].id == this.active) {          
                 this.sounds[i].obj.pause();  
                 this.sounds[i].playing = false;
+                this.active = "";
                 return;
             }
         }    
