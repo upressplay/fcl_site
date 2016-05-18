@@ -100,6 +100,9 @@ site.team = {
 
         $('#team_holder').append('<a href="/team/'+this.data[new_id].id+'" entry_id="'+this.data[new_id].id+'"><div class="team_entry" id="'+this.data[new_id].id+'"></div></a>');
 
+        var img_url = this.data[new_id].img['sizes']['team-thumb'];
+
+        site.trace("this.data[new_id].img = "+this.data[new_id].img)
         var new_content = new Image();  
         new_content.id = new_id;
         new_content.onload = function () {   
@@ -116,7 +119,7 @@ site.team = {
 
         $('#'+this.data[new_id].id).append('<div class="team_img"></div>');
 
-        $('#'+this.data[new_id].id+" .team_img").append('<img src="'+this.data[new_id].img+'">');
+        $('#'+this.data[new_id].id+" .team_img").append('<img src="'+img_url+'">');
         $('#'+this.data[new_id].id).append('<div class="team_info"></div>');
         $('#'+this.data[new_id].id+" .team_info").append('<div class="team_title">'+this.data[new_id].title+'</div>');
         $('#'+this.data[new_id].id+" .team_info").append('<div class="team_desc">'+this.data[new_id].short_desc+'</div>');
@@ -124,7 +127,7 @@ site.team = {
         $('#'+this.data[new_id].id+" .team_info").append('<div class="team_read_more">- Read More -</div>');
 
 
-        new_content.src = this.data[new_id].img;
+        new_content.src = img_url;
 
         
     },
@@ -154,6 +157,10 @@ site.team = {
 
             var new_id = this.team_set[i];
             $('#team_holder').append('<a href="/team/'+this.data[new_id].id+'" entry_id="'+this.data[new_id].id+'"><div class="team_entry" id="'+this.data[new_id].id+'"></div></a>');
+            
+            var img_url = this.data[new_id].img['sizes']['team-thumb'];
+
+            site.trace("this.data[new_id].img = "+this.data[new_id].img)
 
             var new_content = new Image();  
             new_content.id = new_id;
@@ -167,7 +174,7 @@ site.team = {
 
             $('#'+this.data[new_id].id).append('<div class="team_img"></div>');
 
-            $('#'+this.data[new_id].id+" .team_img").append('<img src="'+this.data[new_id].thumb+'">');
+            $('#'+this.data[new_id].id+" .team_img").append('<img src="'+img_url+'">');
             $('#'+this.data[new_id].id).append('<div class="team_info"></div>');
             $('#'+this.data[new_id].id+" .team_info").append('<div class="team_title">'+this.data[new_id].title+'</div>');
             $('#'+this.data[new_id].id+" .team_info").append('<div class="team_desc">'+this.data[new_id].short_desc+'</div>');
@@ -175,7 +182,7 @@ site.team = {
             $('#'+this.data[new_id].id+" .team_info").append('<div class="team_read_more">- Read More -</div>');
 
 
-            new_content.src = this.data[new_id].thumb;         
+            new_content.src = img_url;         
         } 
 
         this.set_btns();

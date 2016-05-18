@@ -20,7 +20,7 @@
 	$meta_img_default = $site_url . '/images/fcl.jpg';
 	$meta_img = $meta_img_default;
 
-	$about_data  = file_get_contents('data/about.json');
+	$about_data  = file_get_contents('http://firstcomeslikemovie.com/wordpress/?json=sitedata/about');
 	$about_data = json_decode($about_data, true);	
 	$about_data = $about_data['data'];
 
@@ -110,11 +110,11 @@
 
 	}
 
-	$team_data  = file_get_contents('data/team.json');
+	$team_data  = file_get_contents('http://firstcomeslikemovie.com/wordpress/?json=sitedata/team');
 	$team_data = json_decode($team_data, true);	
 	$team_data = $team_data['data'];
 
-	$soundtrack_data  = file_get_contents('data/soundtrack.json');
+	$soundtrack_data  = file_get_contents('http://firstcomeslikemovie.com/wordpress/?json=sitedata/soundtrack');
 	$soundtrack_data = json_decode($soundtrack_data, true);	
 	$soundtrack_data = $soundtrack_data['data'];
 
@@ -137,7 +137,9 @@
 
 	}
 
-
+	$header_data  = file_get_contents('http://firstcomeslikemovie.com/wordpress/?json=sitedata/header');
+	$header_data = json_decode($header_data, true);	
+	$header_data = $header_data['data'];
 
 ?>
 <html lang="en">
@@ -244,6 +246,9 @@
 		
 		$js_segments = json_encode($segments);
 		echo "site.segments = ". $js_segments . ";\n"; 
+
+		$header_data = json_encode($header_data);
+		echo "site.header_data = ". $header_data . ";\n"; 
 
 		$news_data = json_encode($news_data);
 		echo "site.news_data = ". $news_data . ";\n"; 

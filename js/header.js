@@ -19,6 +19,8 @@ site.header = {
 
         this.data.push({img:"/images/header_01.jpg", loaded:false});
 
+        this.data = site.header_data;
+
         this.render();
 
 
