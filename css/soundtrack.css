@@ -52,8 +52,8 @@
 }
 
 @media (min-width: 900px) { 
-	.soundtrack_title {
-		width:50rem;
+	.soundtrack_info {
+		width:30rem;
 	}
 }
 
@@ -64,8 +64,8 @@
 
 @media (min-width: 900px) { 
 	.soundtrack_title {
-		font-size: 4rem;
-		line-height: 4.5rem;
+		font-size: 4.5rem;
+		line-height: 5rem;
 	}
 }
 
@@ -76,7 +76,7 @@
 }
 
 @media (min-width: 900px) { 
-	.soundtrack_title {
+	.soundtrack_artist {
 		font-size: 1.5rem;
 		line-height: 1.5rem;
 	}
@@ -96,8 +96,8 @@
 @media (min-width: 900px) { 
 	.soundtrack_link {
 		width:9rem;
-		font-size: 6rem;
-		line-height: 6.5rem;
+		font-size: 4rem;
+		line-height: 8rem;
 	}
 }
 
