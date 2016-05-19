@@ -31,20 +31,18 @@
       <!-- news --></a>
 
 
-      <a href="https://www.instagram.com/6degreeschicago/" target="_blank">
+      <a href="https://www.instagram.com/firstcomeslike/" target="_blank">
       	<div type="instagram" class="social_btn">
       		<span class="fa fa-instagram" aria-hidden="true" ></span>
       		<span class="screen-reader-text">Instagram</span>
       	</div>
       <!-- instagram -->
   	</a>
-  	<a href="https://www.facebook.com/noel.orput" target="_blank">
+  	<a href="https://www.facebook.com/firstcomeslikemovie" target="_blank">
       <div type="facebook" class="social_btn"><span class="fa fa-facebook" aria-hidden="true" ></span><span class="screen-reader-text">Facebook</span></div>
       <!-- linkedin --></a>
 
-      <a href="https://twitter.com/sixglobal" target="_blank">
-      <div type="twitter" class="social_btn"><span class="fa fa-twitter" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>
-      <!-- linkedin --></a>
+
 
       <a href="http://www.imdb.com/title/tt5478698/combined" target="_blank">
       <div class="img_btn">

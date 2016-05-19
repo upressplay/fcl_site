@@ -20,6 +20,10 @@
 	$meta_img_default = $site_url . '/images/fcl.jpg';
 	$meta_img = $meta_img_default;
 
+	$header_data  = file_get_contents('http://firstcomeslikemovie.com/wordpress/?json=sitedata/header');
+	$header_data = json_decode($header_data, true);	
+	$header_data = $header_data['data'];
+
 	$about_data  = file_get_contents('http://firstcomeslikemovie.com/wordpress/?json=sitedata/about');
 	$about_data = json_decode($about_data, true);	
 	$about_data = $about_data['data'];
@@ -30,6 +34,7 @@
 		foreach ( $about_data as $a ) {
 			if($count<1) {
 				$meta_desc_default = $a['desc'];
+				$meta_img  = $a['img'];
 			}
 			
 			$count++;
@@ -40,7 +45,7 @@
 
 
 
-	$news_data  = file_get_contents('data/news.json');
+	$news_data  = file_get_contents('http://firstcomeslikemovie.com/wordpress/?json=sitedata/news');
 	$news_data = json_decode($news_data, true);	
 	$news_data = $news_data['data'];
 
@@ -63,7 +68,7 @@
 
 	}
 
-	$gallery_data  = file_get_contents('data/gallery.json');
+	$gallery_data  = file_get_contents('http://firstcomeslikemovie.com/wordpress/?json=sitedata/gallery');
 	$gallery_data = json_decode($gallery_data, true);	
 	$gallery_data = $gallery_data['data'];
 
@@ -78,7 +83,7 @@
 			if($segments[1] == $g['id']) {
 				$meta_title = $meta_title . " : " . $g['title'];
 				if($g['desc'] != "") $meta_desc = substr(strip_tags($g['desc']), 0, 300);
-				$meta_img  = $g['img'];
+				$meta_img  = $g['img']['url'];
 			}	
 		}
 		
@@ -87,7 +92,7 @@
 	}
 
 
-	$videos_data  = file_get_contents('data/videos.json');
+	$videos_data  = file_get_contents('http://firstcomeslikemovie.com/wordpress/?json=sitedata/videos');
 	$videos_data = json_decode($videos_data, true);	
 	$videos_data = $videos_data['data'];
 
@@ -114,6 +119,23 @@
 	$team_data = json_decode($team_data, true);	
 	$team_data = $team_data['data'];
 
+	if($segments[0] == "castcrew") {
+
+		$meta_title = $meta_title_default . " : Cast & Crew";
+		
+		foreach ( $team_data as $t ) {
+
+			if($segments[1] == $t['id']) {
+				$meta_title = $meta_title . " : " . $t['title'];
+				if($t['bio'] != "") $meta_desc = substr(strip_tags($t['bio']), 0, 300);
+				$meta_img  = $t['img']['url'];
+				echo $meta_img;
+			}	
+		}
+		
+		
+
+	}
 	$soundtrack_data  = file_get_contents('http://firstcomeslikemovie.com/wordpress/?json=sitedata/soundtrack');
 	$soundtrack_data = json_decode($soundtrack_data, true);	
 	$soundtrack_data = $soundtrack_data['data'];
@@ -137,9 +159,7 @@
 
 	}
 
-	$header_data  = file_get_contents('http://firstcomeslikemovie.com/wordpress/?json=sitedata/header');
-	$header_data = json_decode($header_data, true);	
-	$header_data = $header_data['data'];
+	
 
 ?>
 <html lang="en">
@@ -151,16 +171,16 @@
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 
 	<meta property="og:title" content="<?php echo $meta_title; ?>" />
-	<meta property="og:description" content="<?php echo $meta_desc; ?>" />
+	<meta property="og:description" content="<?php echo $meta_desc; ?>"/>
 	<meta property="og:url" content="<?php echo $meta_url; ?>"/>
-	<meta property="og:image" content="<?php echo $meta_img; ?>" />
+	<meta property="og:image" content="<?php echo $meta_img; ?>"/>
   	
   	<meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@FirstComesLike">
     <meta name="twitter:creator" content="@FirstComesLike">
     
-    <meta name="twitter:description" content="{PlaintextCaption}">
-    <meta name="twitter:image" content="{block:Photo}{PhotoURL-500}{/block:Photo}">
+    <meta name="twitter:description" content="<?php echo $meta_desc; ?>">
+    <meta name="twitter:image" content="<?php echo $meta_img; ?>">
 
  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
  	<link href='https://fonts.googleapis.com/css?family=EB+Garamond' rel='stylesheet' type='text/css'>
@@ -211,13 +231,13 @@
 		<div id="site_container">
 			<?php 
 				include 'includes/header.php';
-				include 'includes/soundtrack.php';
+				
 				include 'includes/about.php';
 				include 'includes/videos.php';
 				include 'includes/gallery.php';
 				include 'includes/team.php';
 				include 'includes/news.php';
-
+				include 'includes/soundtrack.php';
 				include 'includes/instagram.php';
 
 

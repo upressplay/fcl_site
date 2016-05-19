@@ -129,13 +129,13 @@ nav {
 	vertical-align: middle;
 }
 
-.img_btn, .img_btn_holder, .img_btn_rest, .img_btn_toll {
+.img_btn, .img_btn_holder, .img_btn_rest, .img_btn_roll {
 	width: 10.5rem;
 	height: 10rem;
 }
 
 @media (min-width: 900px) { 
-	.img_btn, .img_btn_holder, .img_btn_rest, .img_btn_toll {
+	.img_btn, .img_btn_holder, .img_btn_rest, .img_btn_roll {
 		width: 10.5rem;
 		height: 10rem;
 	}

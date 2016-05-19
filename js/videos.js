@@ -90,7 +90,8 @@ site.videos = {
                     thisobj.thumb_loaded(this.id);
 
                 } 
-                var content_url = site.cdn+this.data[i].img;
+                var content_url = site.cdn+this.data[i].img['sizes']["video-thumb"];
+                site.trace("content_url = "+content_url)
                 $('#'+this.data[i].id).find('.videos_thumb').append('<img src="'+content_url+'">')
 
 
@@ -143,10 +144,10 @@ site.videos = {
                     $('#videos_overlay').append('<div id="videos_article"></div>');
                     $('#videos_article').append('<div id="videos_article_img"></div>');
 
-  
-                    if(this.data[i].youtube != "") $('#videos_article_img').append('<iframe width="100%" height="100%" src="https://www.youtube.com/embed/'+this.data[i].youtube+'?rel=0" frameborder="0" allowfullscreen></iframe>');
+                    site.trace("this.data[i].type = "+this.data[i].type)
+                    if(this.data[i].type == "youtube") $('#videos_article_img').append('<iframe width="100%" height="100%" src="https://www.youtube.com/embed/'+this.data[i].youtube+'?rel=0" frameborder="0" allowfullscreen></iframe>');
 
-                    if(this.data[i].vimeo != "") $('#videos_article_img').append('<iframe width="100%" height="auto" src="https://www.youtube.com/embed/'+this.data[i].vimeo+'?rel=0" frameborder="0" allowfullscreen></iframe>');
+                    if(this.data[i].type == "vimeo") $('#videos_article_img').append('<iframe src="https://player.vimeo.com/video/167134574" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
 
                     $('#videos_article').append('<span id="videos_article_top"></span>');
                     $('#videos_article_top').append('<span class="videos_article_title">'+this.data[i].title+'</span>');
@@ -161,11 +162,11 @@ site.videos = {
 
                     if(site.device == "desktop") {
                         $('#videos_article_close').mouseenter(function (event){  
-                           TweenMax.to($( this ), .25, {color:"#b5b5b5", ease:"Power1.easeInOut", overwrite:2}); 
+                           TweenMax.to($( this ), .25, {color:"#d90e0e", ease:"Power1.easeInOut", overwrite:2}); 
                         });
 
                         $('#videos_article_close').mouseleave(function (event){  
-                            TweenMax.to($( this ), .5, {color:"#FFF", ease:"Power1.easeInOut", overwrite:2}); 
+                            TweenMax.to($( this ), .5, {color:"#000", ease:"Power1.easeInOut", overwrite:2}); 
                         });      
                     }
                            

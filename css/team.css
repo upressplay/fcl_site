@@ -118,9 +118,9 @@
 @media (min-width: 900px) { 
 	.team_title {
 		font-family: 'sitefont';
-		font-size: 3.3rem;
-		line-height: 3.6rem;
-		margin: 2rem 0;
+		font-size: 4.3rem;
+		line-height: 4.6rem;
+		margin: 2rem 0 1rem 0;
 	} 
 }
 
@@ -128,7 +128,7 @@
 	font-family: 'Arial';
 	font-size: 3rem;
 	line-height: 3.5rem;
-	margin: 2rem 0;
+	margin: 1rem 0;
 } 
 
 @media (min-width: 900px) { 
@@ -136,7 +136,7 @@
 		font-family: 'Arial';
 		font-size: 1.6rem;
 		line-height: 2.4rem;
-		margin: 2rem 0;
+		margin: 1rem 0;
 	} 
 }
 

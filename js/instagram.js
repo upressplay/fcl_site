@@ -89,6 +89,8 @@ site.instagram = {
     build_instagram_posts : function () {
 
         //site.trace("build_instagram_posts")
+
+        if(this.instagram_data.length < 10) this.max_entries = 5;
         var i;
         
         for (i = 0; i < this.instagram_data.length; i++) {

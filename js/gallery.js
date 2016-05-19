@@ -90,7 +90,7 @@ site.gallery = {
                     thisobj.thumb_loaded(this.id);
 
                 } 
-                var content_url = this.data[i].img;
+                var content_url = this.data[i].img['sizes']['gallery-thumb'];
                 $('#'+this.data[i].id).append('<img src="'+content_url+'">')
 
 
@@ -149,10 +149,42 @@ site.gallery = {
 
                     } 
 
-                    $('#gallery_article_img').append('<img src="'+this.data[i].img+'">');
+                    var img = this.data[i].img.url;
+
+                    $('#gallery_article_img').append('<img src="'+img+'">');
 
                     $('#gallery_article').append('<span id="gallery_article_top"></span>');
                     $('#gallery_article_top').append('<span class="gallery_article_title">'+this.data[i].title+'</span>');
+
+                    $('#gallery_article_top').append('<div class="gallery_share">Share: </div>');
+
+
+                    $('#gallery_article_top .gallery_share').append('<div entryid="'+this.data[i].id+'" type="facebook" class="gallery_share_btn"><span class="fa fa-facebook" aria-hidden="true" ></span><span class="screen-reader-text">Facebook</span></div>');
+
+                    $('#gallery_article_top .gallery_share').append('<div entryid="'+this.data[i].id+'" type="twitter" class="gallery_share_btn"><span class="fa fa-twitter" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
+
+                    $('#gallery_article_top .gallery_share').append('<div entryid="'+this.data[i].id+'" type="pinterest" class="gallery_share_btn"><span class="fa fa-pinterest" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
+
+                    $('#gallery_article_top .gallery_share').append('<div entryid="'+this.data[i].id+'" type="google" class="gallery_share_btn"><span class="fa fa-google" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
+
+
+                    $('#gallery_article_top .gallery_share').append('<div entryid="'+this.data[i].id+'" type="tumblr" class="gallery_share_btn"><span class="fa fa-tumblr" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
+
+                     $('.gallery_share_btn').click(function(event){
+                        var type = $(this).attr('type');
+                        var id = $(this).attr('entryid');
+                        thisobj.share_article(type,id);
+                    });
+                    
+                    if(site.device == "desktop") {
+                        $('.gallery_share_btn').mouseenter(function (event){  
+                           TweenMax.to($( this ), .25, {color:"#d90e0e", ease:"Power1.easeInOut", overwrite:2}); 
+                        });
+
+                        $('.gallery_share_btn').mouseleave(function (event){  
+                            TweenMax.to($( this ), .5, {color:"#000", ease:"Power1.easeInOut", overwrite:2}); 
+                        });      
+                    }
                     
                     $('#gallery_article').append('<span class="gallery_article_desc">'+this.data[i].desc+'</span>');
 
@@ -164,15 +196,15 @@ site.gallery = {
 
                     if(site.device == "desktop") {
                         $('#gallery_article_close').mouseenter(function (event){  
-                           TweenMax.to($( this ), .25, {color:"#b5b5b5", ease:"Power1.easeInOut", overwrite:2}); 
+                           TweenMax.to($( this ), .25, {color:"#d90e0e", ease:"Power1.easeInOut", overwrite:2}); 
                         });
 
                         $('#gallery_article_close').mouseleave(function (event){  
-                            TweenMax.to($( this ), .5, {color:"#FFF", ease:"Power1.easeInOut", overwrite:2}); 
+                            TweenMax.to($( this ), .5, {color:"#000", ease:"Power1.easeInOut", overwrite:2}); 
                         });      
                     }
                            
-                    new_content.src = this.data[i].img;
+                    new_content.src = img;
                     
                     this.resize();
                 }
@@ -180,6 +212,23 @@ site.gallery = {
 
             
             
+        }
+
+    },
+
+    share_article : function (type, id) {
+        
+        site.trace("share_article type = "+type+" id = "+id);
+
+        var i;
+        for (i = 0; i < this.data.length; i++) {
+            if(this.data[i].id == id) {
+                var url = site.site_url+"/"+this.id+"/"+this.data[i].id;
+                var img = this.data[i].img;
+                var desc = this.data[i].title + " " +this.data[i].desc;   
+
+                site.share(type,id,url,img,desc);
+            }
         }
 
     },
@@ -207,147 +256,6 @@ site.gallery = {
             
     },
 
-    gallery_img_w : function () {
-        var value = 400 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .7;
-        return value;
-    }, 
-    gallery_entry_tb : function () {
-        var value = 10 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .01;
-        return value;
-    }, 
-
-    gallery_entry_lr : function () {
-        var value = 55 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .05;
-        return value;
-    }, 
-
-
-
-
-    gallery_holder_w : function () {
-        var value = 1364 * site.scale();;
-        if(site.device == "mobile") value = site.window_width() * .7;
-        return value;
-    },
-
-    gallery_article_close_size : function () {
-        var value = 36 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .08;
-        return value;
-    },
-
-    gallery_article_close_leading : function () {
-        var value = 75 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .1;
-        return value;
-    }, 
-
-    gallery_article_desc_size : function () {
-        var value = 16 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .04;
-        return value;
-    },
-
-    gallery_article_desc_leading : function () {
-        var value = 32 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .07;
-        return value;
-    }, 
-
-    gallery_article_title_size : function () {
-        var value = 55 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .08;
-        return value;
-    },
-
-    gallery_article_title_leading : function () {
-        var value = 75 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .1;
-        return value;
-    }, 
-
-    gallery_article_img_rb : function () {
-        var value = 25 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .02;
-        return value;
-    },
-
-    gallery_article_img_w : function () {
-        var value = 600 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * 1;
-        return value;
-    },
-
-    gallery_read_more_size : function () {
-        var value = 33 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .06;
-        return value;
-    },
-
-    gallery_read_more_leading : function () {
-        var value = 48 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .09;
-        return value;
-    }, 
-
-
-
-    gallery_desc_size : function () {
-        var value = 16 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .04;
-        return value;
-    }, 
-
-    gallery_desc_leading : function () {
-        var value = 24 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .05;
-        return value;
-    }, 
-
-    gallery_title_size : function () {
-        var value = 66 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .09;
-        return value;
-    }, 
-
-    gallery_title_leding : function () {
-        var value = 60 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .12;
-        return value;
-    }, 
-
-    gallery_title_t: function () {
-        var value = 10 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .03;
-        return value;
-    }, 
-
-    
-
-    gallery_img_h : function () {
-        var value = (216/400) * this.gallery_img_w();
-        return value;
-    },  
-
-    arrow_tb : function () {
-        var value = 240 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .5;
-        return value;
-    }, 
-
-    arrow_w : function () {
-        var value = 68 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .1;
-        return value;
-    },  
-
-    arrow_h : function () {
-        var value = (114/68) * this.arrow_w();
-        return value;
-    },  
     
 
 };

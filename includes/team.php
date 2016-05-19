@@ -27,7 +27,7 @@
 						echo $t['title'];
 						echo '</div><!-- team_title -->';
 						echo '<div class="team_desc">';
-						echo $t['short_desc'];
+						echo $t['position'];
 						echo '</div><!-- team_desc -->';
 						echo '<div class="team_read_more">';
 						echo 'read more°';

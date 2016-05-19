@@ -122,7 +122,7 @@ site.team = {
         $('#'+this.data[new_id].id+" .team_img").append('<img src="'+img_url+'">');
         $('#'+this.data[new_id].id).append('<div class="team_info"></div>');
         $('#'+this.data[new_id].id+" .team_info").append('<div class="team_title">'+this.data[new_id].title+'</div>');
-        $('#'+this.data[new_id].id+" .team_info").append('<div class="team_desc">'+this.data[new_id].short_desc+'</div>');
+        $('#'+this.data[new_id].id+" .team_info").append('<div class="team_desc">'+this.data[new_id].position+'</div>');
 
         $('#'+this.data[new_id].id+" .team_info").append('<div class="team_read_more">- Read More -</div>');
 
@@ -177,7 +177,7 @@ site.team = {
             $('#'+this.data[new_id].id+" .team_img").append('<img src="'+img_url+'">');
             $('#'+this.data[new_id].id).append('<div class="team_info"></div>');
             $('#'+this.data[new_id].id+" .team_info").append('<div class="team_title">'+this.data[new_id].title+'</div>');
-            $('#'+this.data[new_id].id+" .team_info").append('<div class="team_desc">'+this.data[new_id].short_desc+'</div>');
+            $('#'+this.data[new_id].id+" .team_info").append('<div class="team_desc">'+this.data[new_id].position+'</div>');
 
             $('#'+this.data[new_id].id+" .team_info").append('<div class="team_read_more">- Read More -</div>');
 
@@ -256,7 +256,7 @@ site.team = {
             
                 
             for (i = 0; i < this.data.length; i++) {
-                site.trace("this.data[i].id = "+this.data[i].id)
+                site.trace("this.data[i].id = "+this.data[i].id+" val = "+val)
                 if(this.data[i].id == val) {
                     $('body').prepend('<div id="team_overlay"></div>');
 
@@ -278,7 +278,9 @@ site.team = {
 
                     } 
 
-                    $('#team_article_img').append('<img src="'+this.data[i].img+'">');
+                    var img = this.data[i].img.url;
+
+                    $('#team_article_img').append('<img src="'+img+'">');
 
                     $('#team_article').append('<span id="team_article_top"></span>');
                     $('#team_article_top').append('<span class="team_article_title">'+this.data[i].title+'</span>');
@@ -313,7 +315,7 @@ site.team = {
                         });      
                     }
 
-                    $('#team_article').append('<span class="team_article_desc">'+this.data[i].desc+'</span>');
+                    $('#team_article').append('<span class="team_article_desc">'+this.data[i].bio+'</span>');
 
          
 
@@ -323,15 +325,15 @@ site.team = {
 
                     if(site.device == "desktop") {
                         $('#team_article_close').mouseenter(function (event){  
-                           TweenMax.to($( this ), .25, {color:"#b5b5b5", ease:"Power1.easeInOut", overwrite:2}); 
+                           TweenMax.to($( this ), .25, {color:"#d90e0e", ease:"Power1.easeInOut", overwrite:2}); 
                         });
 
                         $('#team_article_close').mouseleave(function (event){  
-                            TweenMax.to($( this ), .5, {color:"#FFF", ease:"Power1.easeInOut", overwrite:2}); 
+                            TweenMax.to($( this ), .5, {color:"#000", ease:"Power1.easeInOut", overwrite:2}); 
                         });      
                     }
                            
-                    new_content.src = this.data[i].img;
+                    new_content.src = img;
                     
                     this.resize();
                 }
@@ -339,6 +341,23 @@ site.team = {
 
             
             
+        }
+
+    },
+
+    share_article : function (type, id) {
+        
+        site.trace("share_article type = "+type+" id = "+id);
+
+        var i;
+        for (i = 0; i < this.data.length; i++) {
+            if(this.data[i].id == id) {
+                var url = site.site_url+"/"+this.id+"/"+this.data[i].id;
+                var img = this.data[i].img;
+                var desc = this.data[i].title + " " +this.data[i].desc;   
+
+                site.share(type,id,url,img,desc);
+            }
         }
 
     },

@@ -198,6 +198,17 @@ class json_api_sitedata_controller {
 
 	}
 
+	public function getmyname() {
+
+		$thename = 'TVGLA';
+
+		return array(
+			'status' => 'ok',
+			'name' => $thename
+		);
+
+	}
+
 }
 
 ?>

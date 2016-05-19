@@ -15,7 +15,12 @@
 				foreach ( $news_data as $n ) {
 
 					if($news_count <3) {
-						echo '<a href="/news/'.$n['id'].'" entry_id="'.$n['id'].'">';
+						if($n['ext_link'] != "") {
+							echo '<a href="'.$n['ext_link'].'" target="_blank">';
+						} else {
+							echo '<a href="/news/'.$n['id'].'" entry_id="'.$n['id'].'">';
+						}
+						
 						echo '<div class="news_entry" id="'.$n['id'].'">';
 
 						echo '<div class="news_img">';
@@ -29,6 +34,7 @@
 						echo '<div class="news_desc">';
 						echo $n['short_desc'];
 						echo '</div><!-- news_desc -->';
+
 						echo '<div class="news_read_more">';
 						echo 'read more°';
 						echo '</div><!-- news_read_more -->';

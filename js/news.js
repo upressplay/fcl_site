@@ -317,11 +317,11 @@ site.news = {
 
                     if(site.device == "desktop") {
                         $('#news_article_close').mouseenter(function (event){  
-                           TweenMax.to($( this ), .25, {color:"#b5b5b5", ease:"Power1.easeInOut", overwrite:2}); 
+                           TweenMax.to($( this ), .25, {color:"#d90e0e", ease:"Power1.easeInOut", overwrite:2}); 
                         });
 
                         $('#news_article_close').mouseleave(function (event){  
-                            TweenMax.to($( this ), .5, {color:"#FFF", ease:"Power1.easeInOut", overwrite:2}); 
+                            TweenMax.to($( this ), .5, {color:"#000", ease:"Power1.easeInOut", overwrite:2}); 
                         });      
                     }
                            
@@ -333,6 +333,22 @@ site.news = {
 
             
             
+        }
+
+    },
+    share_article : function (type, id) {
+        
+        site.trace("share_article type = "+type+" id = "+id);
+
+        var i;
+        for (i = 0; i < this.data.length; i++) {
+            if(this.data[i].id == id) {
+                var url = site.site_url+"/"+this.id+"/"+this.data[i].id;
+                var img = this.data[i].img;
+                var desc = this.data[i].title + " " +this.data[i].desc;   
+
+                site.share(type,id,url,img,desc);
+            }
         }
 
     },
