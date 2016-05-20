@@ -14,9 +14,14 @@ if ( function_exists( 'add_image_size' ) ) add_theme_support( 'post-thumbnails' 
 
 	if ( function_exists( 'add_image_size' ) ) {
 	add_image_size( 'gallery-thumb', 300, 170, true );
+	add_image_size( 'gallery-display', 1600, 900, true );
 	add_image_size( 'video-thumb', 300, 170, true );
+	add_image_size( 'video-display', 1600, 900, true );
 	add_image_size( 'news-thumb', 300, 129, true );
+	add_image_size( 'news-display', 1600, 686, true );
 	add_image_size( 'team-thumb', 300, 129, true );
+	add_image_size( 'team-display', 1600, 686, true );
+	add_image_size( 'share', 1200, 630, true );
 }
 
 add_action( 'init', 'create_site_post_types' );

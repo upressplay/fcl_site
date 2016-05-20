@@ -278,7 +278,7 @@ site.team = {
 
                     } 
 
-                    var img = this.data[i].img.url;
+                    var img = this.data[i].img['sizes']['team-display'];
 
                     $('#team_article_img').append('<img src="'+img+'">');
 

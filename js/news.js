@@ -273,7 +273,9 @@ site.news = {
 
                     } 
 
-                    $('#news_article_img').append('<img src="'+this.data[i].img+'">');
+                    var img = this.data[i].img['sizes']['news-display'];
+
+                    $('#news_article_img').append('<img src="'+img+'">');
 
                     $('#news_article').append('<span id="news_article_top"></span>');
                     $('#news_article_top').append('<span class="news_article_title">'+this.data[i].title+'</span>');
@@ -325,7 +327,7 @@ site.news = {
                         });      
                     }
                            
-                    new_content.src = this.data[i].img;
+                    new_content.src = img;
                     
                     this.resize();
                 }

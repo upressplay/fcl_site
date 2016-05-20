@@ -11,6 +11,7 @@ site.audio = {
     audio_on:false,
     active:"",
     current:0,
+    active_clr:"#d90e0e",
     initialize : function () {
 
         this.render();
@@ -131,6 +132,11 @@ site.audio = {
                     TweenMax.killDelayedCallsTo(this.back_btn);
                     TweenMax.delayedCall(.5, this.set_current_time, [i], this);
                     this.current = i;
+                    $('#'+this.sounds[i].id).css({
+                        'background-color':this.active_clr
+                    });
+                    $('#'+this.sounds[i].id).toggleClass( 'inactive' ,'active' );
+                    $('#'+this.sounds[i].id+'_play_btn').toggleClass( 'fa-play-circle' ,'fa-stop-circle' );
                 } else {
                     this.load(id,true);
                 }
@@ -156,6 +162,8 @@ site.audio = {
                 this.sounds[i].obj.pause();  
                 this.sounds[i].playing = false;
                 this.active = "";
+                //$('#'+this.sounds[i].id).toggleClass( 'active' ,'inactive' );
+                //$('#'+this.sounds[i].id+'_play_btn').toggleClass( 'fa-stop-circle' ,'fa-play-circle' );
                 return;
             }
         }    

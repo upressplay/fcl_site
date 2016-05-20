@@ -143,7 +143,7 @@ class json_api_sitedata_controller {
 
 	public function gallery () {
 
-		query_posts( array ( 'post_type' => 'gallery' ) );
+		query_posts( array ( 'post_type' => 'gallery' , 'post_count' => 100) );
 
 		$data = array();
 
@@ -198,16 +198,6 @@ class json_api_sitedata_controller {
 
 	}
 
-	public function getmyname() {
-
-		$thename = 'TVGLA';
-
-		return array(
-			'status' => 'ok',
-			'name' => $thename
-		);
-
-	}
 
 }
 

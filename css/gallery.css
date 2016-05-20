@@ -166,6 +166,12 @@ p {
 	padding-top: 2%;
 }
 
+@media (min-width: 900px) { 
+	#load_more_gallery {
+		height: 6rem;
+	}
+}
+
 #load_more_gallery_btn {
 	width: 40%;
 	display: inline-block;

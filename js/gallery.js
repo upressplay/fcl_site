@@ -7,9 +7,9 @@ $(document).ready(function(){
 site.gallery = {
     id:"gallery",
     data:site.gallery_data,
-    set_start:-2,
+    set_start:-10,
     set_end:-1,
-    set_total:2,
+    set_total:10,
     overlay_open:false,
     loading:false,
 
@@ -49,7 +49,16 @@ site.gallery = {
                 TweenMax.to($( this ), .5, {color:"#fff", backgroundColor:'#000', ease:"Power1.easeInOut", overwrite:2}); 
             });      
         }
-     
+
+        site.trace(this.id+" this.data.length = "+this.data.length)
+        if(this.data.length < 10) {
+            this.set_total = 5;
+
+        }
+        
+        this.set_start = this.set_total * -1;
+        this.set_end = -1;
+
         this.load_more();
         this.resize();
 
@@ -66,7 +75,7 @@ site.gallery = {
         this.set_end = this.set_end + this.set_total;
         if(this.set_end > this.data.length-1) this.set_end = this.data.length-1;
 
-        site.trace('load_more')
+        site.trace(this.id+' load_more')
         site.trace('this.set_start = '+this.set_start+" this.set_end = "+this.set_end)
         this.set();   
 
