@@ -27,7 +27,7 @@ site.instagram = {
 
     	this.resize();
 
-        //this.get_instagram();
+        this.get_instagram();
   
     },
 

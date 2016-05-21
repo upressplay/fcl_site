@@ -294,7 +294,9 @@
 		height:auto;
 	}
 }
-
+.team_article_desc p {
+	padding: 1.5rem 0;
+}
 .team_share {
 	float: left;
 	width: 82rem;

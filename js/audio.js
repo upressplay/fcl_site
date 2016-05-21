@@ -12,6 +12,9 @@ site.audio = {
     active:"",
     current:0,
     active_clr:"#d90e0e",
+    inactive_clr:"#fff",
+    active_title_clr:"#fff",
+    inactive_title_clr:"#000",
     initialize : function () {
 
         this.render();
@@ -30,13 +33,17 @@ site.audio = {
         var i;
         for (i=0;i<this.sounds.length;i++)
         { 
+            $('#'+this.sounds[i].id+"_play_btn").click(function(event){
+                var id = $(this).attr('btnid');
+                thisobj.play(id);
+            });  
 
+            $('#'+this.sounds[i].id+"_stop_btn").click(function(event){
+                thisobj.stop();
+            });   
         }
 
-        $('.soundtrack_play').click(function(event){
-            var id = $(this).attr('btnid');
-            thisobj.play(id);
-        });
+        
 
         site.trace(this.id+" render this.sounds.length = "+this.sounds.length)
         
@@ -132,14 +139,14 @@ site.audio = {
                     TweenMax.killDelayedCallsTo(this.back_btn);
                     TweenMax.delayedCall(.5, this.set_current_time, [i], this);
                     this.current = i;
-                    $('#'+this.sounds[i].id).css({
-                        'background-color':this.active_clr
-                    });
-                    $('#'+this.sounds[i].id).toggleClass( 'inactive' ,'active' );
-                    $('#'+this.sounds[i].id+'_play_btn').toggleClass( 'fa-play-circle' ,'fa-stop-circle' );
+
+                    
+                    this.track_active(i);
                 } else {
                     this.load(id,true);
                 }
+            } else {
+                this.track_inactive(i);
             }
         } 
              
@@ -151,6 +158,43 @@ site.audio = {
         this.sounds[val].obj.currentTime = 0;
 
     },
+    track_active : function (i) {
+
+
+        TweenMax.to($('#'+this.sounds[i].id), .5, {backgroundColor:this.active_clr, ease:"Power1.easeInOut", overwrite:2}); 
+
+        TweenMax.to($('#'+this.sounds[i].id).find('.soundtrack_title'), .5, {color:this.active_title_clr, ease:"Power1.easeInOut", overwrite:2}); 
+
+        TweenMax.to($('#'+this.sounds[i].id).find('.soundtrack_artist'), .5, {color:this.active_title_clr, ease:"Power1.easeInOut", overwrite:2}); 
+
+        TweenMax.to($('#'+this.sounds[i].id).find('.soundtrack_link'), .5, {color:this.active_title_clr, ease:"Power1.easeInOut", overwrite:2}); 
+
+
+        TweenMax.to($('#'+this.sounds[i].id+'_play_btn'), .5, {opacity:0, onComplete:site.div_display, onCompleteParams:['#'+this.sounds[i].id+'_play_btn','none'], ease:"Power1.easeInOut", overwrite:2}); 
+
+        TweenMax.to($('#'+this.sounds[i].id+'_stop_btn'), .5, {delay:.5, opacity:1, onStart:site.div_display, onStartParams:['#'+this.sounds[i].id+'_stop_btn','inline-block'], ease:"Power1.easeInOut", overwrite:2}); 
+
+
+
+
+    },
+
+    track_inactive : function (i) {
+
+        TweenMax.to($('#'+this.sounds[i].id), .5, {backgroundColor:this.inactive_clr, ease:"Power1.easeInOut", overwrite:2}); 
+
+        TweenMax.to($('#'+this.sounds[i].id).find('.soundtrack_title'), .5, {color:this.inactive_title_clr, ease:"Power1.easeInOut", overwrite:2}); 
+
+        TweenMax.to($('#'+this.sounds[i].id).find('.soundtrack_artist'), .5, {color:this.inactive_title_clr, ease:"Power1.easeInOut", overwrite:2}); 
+
+        TweenMax.to($('#'+this.sounds[i].id).find('.soundtrack_link'), .5, {color:this.inactive_title_clr, ease:"Power1.easeInOut", overwrite:2}); 
+
+        TweenMax.to($('#'+this.sounds[i].id+'_stop_btn'), .5, {opacity:0, onComplete:site.div_display, onCompleteParams:['#'+this.sounds[i].id+'_stop_btn','none'], ease:"Power1.easeInOut", overwrite:2}); 
+
+        TweenMax.to($('#'+this.sounds[i].id+'_play_btn'), .5, {delay:.5, opacity:1, onStart:site.div_display, onStartParams:['#'+this.sounds[i].id+'_play_btn','inline-block'], ease:"Power1.easeInOut", overwrite:2}); 
+
+    },
+
     stop : function() {
 
         site.trace("audio stop")
@@ -162,8 +206,8 @@ site.audio = {
                 this.sounds[i].obj.pause();  
                 this.sounds[i].playing = false;
                 this.active = "";
-                //$('#'+this.sounds[i].id).toggleClass( 'active' ,'inactive' );
-                //$('#'+this.sounds[i].id+'_play_btn').toggleClass( 'fa-stop-circle' ,'fa-play-circle' );
+                this.track_inactive(i);
+                
                 return;
             }
         }    

@@ -6,7 +6,7 @@
 		<?php 
 		
 		foreach ( $soundtrack_data as $s ) {
-			echo '<div id="'.$s['id'].'" class="soundtrack inactive">';
+			echo '<div id="'.$s['id'].'" class="soundtrack">';
 				echo '<div class="soundtrack_img">';
 					echo '<img src="'.$s['img']['sizes']['soundtrack-thumb'].'">';
 				echo '</div><!-- soundtrack_img -->';
@@ -24,6 +24,7 @@
 					echo '<div class="soundtrack_link fa fa-external-link"></div>';
 				echo '</a>';
 				echo '<div btnid="'.$s['id'].'" id="'.$s['id'].'_play_btn" class="soundtrack_play fa fa-play-circle"></div>';
+				echo '<div btnid="'.$s['id'].'" id="'.$s['id'].'_stop_btn" class="soundtrack_stop fa fa-stop-circle"></div>';
 			echo '</div><!-- soundtrack -->';
 		}
 		?>

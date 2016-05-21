@@ -8,8 +8,6 @@ site.nav = {
 
     id:"nav",
     data:[],
-    current:-1,
-    new:0,
     loading:false,
     open:false,
     scroll_urls:['/about/','/castcrew/','/gallery/', '/news/','/videos/', '/soundtrack/'],
@@ -30,13 +28,14 @@ site.nav = {
 
         var thisobj = this;
 
+        
+
+
+        TweenMax.from($('nav'), 1, {top:"-15rem", overwrite:2}); 
+
         $('nav').css({
             "display":"block"
             });
-
-        TweenMax.set($('nav'), {opacity:0}); 
-
-        TweenMax.to($('nav'), .5, {opacity:1, overwrite:2}); 
 
         $( "nav a" ).add( "footer a" ).click(function( event ) {
 
@@ -104,11 +103,14 @@ site.nav = {
                 href = href.replace('/','');
                 href = href.replace('/','');
                 this.btn_set_url(href);
+                if(site.device == "mobile") this.toggle();
                 return;
             }   
         }
         
         window.open(href,target);
+
+        
     },
 
     search_positions : function () {
@@ -133,11 +135,8 @@ site.nav = {
 
     toggle : function () {
 
-        site.trace(this.id+" toggle");
+        site.trace(this.id+" toggle this.open = "+this.open);
 
-        var thisobj = this;
-
-        this.new = this.current + 1;
         if(this.open) {
             this.open = false;
             TweenMax.to($('#nav_btns_toggle'), .5, {height:'0px', ease:"Power1.easeInOut", overwrite:2}); 

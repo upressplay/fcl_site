@@ -97,9 +97,10 @@ site.news = {
         }
 
         site.trace("next            new_id = "+new_id+" tthis.news_set.length = "+this.news_set.length)
+        site.trace("this.data[new_id].ext_link = "+this.data[new_id].ext_link)
         
         if(this.data[new_id].ext_link != "") {
-            $('#news_holder').append('<a href="'+this.data[new_id].ext_link+'" target="_blank"><div class="news_entry" id="'+this.data[new_id].id+'"></div></a>');
+            $('#news_holder').append('<a href="'+this.data[new_id].ext_link+'" entry_id="'+this.data[new_id].id+'" target="_blank"><div class="news_entry" id="'+this.data[new_id].id+'"></div></a>'); 
         } else {
             $('#news_holder').append('<a href="/news/'+this.data[new_id].id+'" entry_id="'+this.data[new_id].id+'"><div class="news_entry" id="'+this.data[new_id].id+'"></div></a>');     
         }
@@ -124,12 +125,12 @@ site.news = {
 
         $('#'+this.data[new_id].id).append('<div class="news_img"></div>');
 
-        $('#'+this.data[new_id].id+" .news_img").append('<img src="'+img_url+'">');
+        $('#'+this.data[new_id].id).find(".news_img").append('<img src="'+img_url+'">');
         $('#'+this.data[new_id].id).append('<div class="news_info"></div>');
-        $('#'+this.data[new_id].id+" .news_info").append('<div class="news_title">'+this.data[new_id].title+'</div>');
-        $('#'+this.data[new_id].id+" .news_info").append('<div class="news_desc">'+this.data[new_id].short_desc+'</div>');
+        $('#'+this.data[new_id].id).find(".news_info").append('<div class="news_title">'+this.data[new_id].title+'</div>');
+        $('#'+this.data[new_id].id).find(".news_info").append('<div class="news_desc">'+this.data[new_id].short_desc+'</div>');
 
-        $('#'+this.data[new_id].id+" .news_info").append('<div class="news_read_more">- Read More -</div>');
+        $('#'+this.data[new_id].id).find(".news_info").append('<div class="news_read_more">- Read More -</div>');
 
 
         new_content.src = img_url;
@@ -162,8 +163,10 @@ site.news = {
 
             var new_id = this.news_set[i];
 
+            site.trace("this.data[new_id].ext_link = "+this.data[new_id].ext_link)
+
             if(this.data[new_id].ext_link != "") {
-                $('#news_holder').append('<a href="'+this.data[new_id].ext_link+'" target="_blank"><div class="news_entry" id="'+this.data[new_id].id+'"></div></a>');
+                $('#news_holder').append('<a href="'+this.data[new_id].ext_link+'" entry_id="'+this.data[new_id].id+'" target="_blank"><div class="news_entry" id="'+this.data[new_id].id+'"></div></a>');  
             } else {
                 $('#news_holder').append('<a href="/news/'+this.data[new_id].id+'" entry_id="'+this.data[new_id].id+'"><div class="news_entry" id="'+this.data[new_id].id+'"></div></a>');     
             }
@@ -184,12 +187,12 @@ site.news = {
 
             $('#'+this.data[new_id].id).append('<div class="news_img"></div>');
 
-            $('#'+this.data[new_id].id+" .news_img").append('<img src="'+img_url+'">');
-            $('#'+this.data[new_id].id).append('<div class="news_info"></div>');
-            $('#'+this.data[new_id].id+" .news_info").append('<div class="news_title">'+this.data[new_id].title+'</div>');
-            $('#'+this.data[new_id].id+" .news_info").append('<div class="news_desc">'+this.data[new_id].short_desc+'</div>');
+            $('#'+this.data[new_id].id).find(".news_img").append('<img src="'+img_url+'">');
 
-            $('#'+this.data[new_id].id+" .news_info").append('<div class="news_read_more">- Read More -</div>');
+            $('#'+this.data[new_id].id).append('<div class="news_info"></div>');
+            $('#'+this.data[new_id].id).find(".news_info").append('<div class="news_title">'+this.data[new_id].title+'</div>');
+            $('#'+this.data[new_id].id).find(".news_info").append('<div class="news_desc">'+this.data[new_id].short_desc+'</div>');
+            $('#'+this.data[new_id].id).find(".news_info").append('<div class="news_read_more">- Read More -</div>');
 
 
             new_content.src = img_url;         
@@ -413,7 +416,10 @@ site.news = {
         if(this.new < 0) this.new = this.data.length-1;
         if(this.new > this.data.length-1) this.new = 0;
 
-        if(this.data[this.new].ext_link != "") this.nav(type);
+        if(this.data[this.new].ext_link != "") {
+            this.nav(type);
+            return;
+        } 
 
         TweenMax.delayedCall(.55, thisobj.open_article, [this.data[this.new].id], this);
     },
@@ -436,8 +442,10 @@ site.news = {
             var id = $(this).attr('entry_id');
             var target = $(this).attr('target');
             var href = $(this).attr('href');
+            site.trace("target = "+target)
             if(target == "_blank") {
-                window.open(href,"_blank")
+                window.open(href,"_blank");
+                return
             }
             thisobj.open_article(id);
         });
