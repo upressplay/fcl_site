@@ -12,6 +12,7 @@ site.gallery = {
     set_total:10,
     overlay_open:false,
     loading:false,
+    current:0,
 
     initialize : function () {
 
@@ -33,7 +34,7 @@ site.gallery = {
         $('#gallery a').click(function(event){
             event.preventDefault();
             var id = $(this).attr('entry_id');
-            thisobj.open_gallery(id);
+            thisobj.open_article(id);
         });
 
         $('#load_more_gallery_btn').click(function(event){
@@ -64,7 +65,7 @@ site.gallery = {
 
         site.trace("site.segments[1] = "+site.segments[1]+" site.segments[2] = "+site.segments[2]);
         if(site.segments[1] == "gallery" && site.segments[2] != "") {
-            TweenMax.delayedCall(1, thisobj.open_gallery, [site.segments[2]], this);
+            TweenMax.delayedCall(1, thisobj.open_article, [site.segments[2]], this);
         }
         
     },
@@ -108,7 +109,7 @@ site.gallery = {
         } 
 
         if(this.set_end == this.data.length-1) {
-            TweenMax.to($('#load_more_gallery_btn'), .5, {opacity:0, onComplete:site.div_display, onCompleteParams:['#load_more_gallery_btn', 'none'], ease:"Power1.easeInOut", ooverwrite:2}); 
+            TweenMax.to($('#load_more_gallery'), .5, {opacity:0, onComplete:site.div_display, onCompleteParams:['#load_more_gallery_btn', 'none'], ease:"Power1.easeInOut", ooverwrite:2}); 
         }
     },
 
@@ -118,19 +119,15 @@ site.gallery = {
         TweenMax.to($('#'+this.data[val].id), .5, {opacity:1, ease:"Power1.easeInOut", ooverwrite:2}); 
     },
 
-    open_gallery : function (val) {
-        site.trace("open_gallery val = "+val)
+    open_article : function (val) {
+        site.trace("open_article val = "+val)
 
         var i;
         var thisobj = this;
 
         if(this.overlay_open) {
 
-            site.set_url("gallery");
-
-            this.overlay_open = false;
-
-            TweenMax.to($('#gallery_overlay'), .5, {height:0, ease:"Power1.easeInOut", onComplete:this.reset_article, onCompleteScope:this, overwrite:2}); 
+            this.close_article();
         } else {
 
             
@@ -138,6 +135,7 @@ site.gallery = {
             for (i = 0; i < this.data.length; i++) {
                 site.trace("this.data[i].id = "+this.data[i].id)
                 if(this.data[i].id == val) {
+
                     $('body').prepend('<div id="gallery_overlay"></div>');
 
                     site.set_url("gallery",this.data[i].id);
@@ -145,7 +143,14 @@ site.gallery = {
                     
                     $('#gallery_overlay').append('<div id="gallery_nav"></div>');
                     $('#gallery_nav').append('<div id="gallery_nav_img"><img src="'+site.cdn+'/images/gallery_header.png"></div>');
-                    $('#gallery_nav').append('<div id="gallery_article_close" class="fa fa-arrow-circle-right" ></div>');
+                    $('#gallery_nav').append('<div type="right" class="gallery_article_btn fa fa-arrow-circle-right" ></div>');
+                    $('#gallery_nav').append('<div type="close" class="gallery_article_btn fa fa-times" ></div>');
+                    $('#gallery_nav').append('<div type="left" class="gallery_article_btn fa fa-arrow-circle-left" ></div>');
+
+                    $('.gallery_article_btn').click(function(event){
+                        var type = $(this).attr('type');
+                        thisobj.nav(type);
+                    });
 
                     $('#gallery_overlay').append('<div id="gallery_article"></div>');
                     $('#gallery_article').append('<div id="gallery_article_img"></div>');
@@ -172,16 +177,19 @@ site.gallery = {
 
                     $('#gallery_article_top .gallery_share').append('<div entryid="'+this.data[i].id+'" type="twitter" class="gallery_share_btn"><span class="fa fa-twitter" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
 
-                    $('#gallery_article_top .gallery_share').append('<div entryid="'+this.data[i].id+'" type="pinterest" class="gallery_share_btn"><span class="fa fa-pinterest" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
 
-                    $('#gallery_article_top .gallery_share').append('<div entryid="'+this.data[i].id+'" type="google" class="gallery_share_btn"><span class="fa fa-google" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
+                    $('#gallery_article_top .gallery_share').append('<div entryid="'+this.data[i].id+'" type="google" class="gallery_share_btn"><span class="fa fa-google" aria-hidden="true" ></span><span class="screen-reader-text">Google</span></div>');
+
+                    $('#gallery_article_top .gallery_share').append('<div entryid="'+this.data[i].id+'" type="pinterest" class="gallery_share_btn"><span class="fa fa-pinterest" aria-hidden="true" ></span><span class="screen-reader-text">Pinterest</span></div>');
+
+                    $('#gallery_article_top .gallery_share').append('<div entryid="'+this.data[i].id+'" type="tumblr" class="gallery_share_btn"><span class="fa fa-tumblr" aria-hidden="true" ></span><span class="screen-reader-text">Tumblr</span></div>');
 
 
-                    $('#gallery_article_top .gallery_share').append('<div entryid="'+this.data[i].id+'" type="tumblr" class="gallery_share_btn"><span class="fa fa-tumblr" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
 
                      $('.gallery_share_btn').click(function(event){
                         var type = $(this).attr('type');
                         var id = $(this).attr('entryid');
+                        site.trace("gallery_share_btn type = "+type+" id = "+id);
                         thisobj.share_article(type,id);
                     });
                     
@@ -197,18 +205,14 @@ site.gallery = {
                     
                     $('#gallery_article').append('<span class="gallery_article_desc">'+this.data[i].desc+'</span>');
 
-         
 
-                    $('#gallery_article_close').click(function(event){
-                        thisobj.open_gallery();
-                        });
 
                     if(site.device == "desktop") {
-                        $('#gallery_article_close').mouseenter(function (event){  
+                        $('.gallery_article_btn').mouseenter(function (event){  
                            TweenMax.to($( this ), .25, {color:"#d90e0e", ease:"Power1.easeInOut", overwrite:2}); 
                         });
 
-                        $('#gallery_article_close').mouseleave(function (event){  
+                        $('.gallery_article_btn').mouseleave(function (event){  
                             TweenMax.to($( this ), .5, {color:"#000", ease:"Power1.easeInOut", overwrite:2}); 
                         });      
                     }
@@ -216,6 +220,8 @@ site.gallery = {
                     new_content.src = img;
                     
                     this.resize();
+
+                    this.current = i;
                 }
             }
 
@@ -225,6 +231,41 @@ site.gallery = {
 
     },
 
+    close_article : function () {
+
+        site.set_url(this.id);
+
+        this.overlay_open = false;
+
+        TweenMax.to($('#gallery_overlay'), .5, {height:0, ease:"Power1.easeInOut", onComplete:this.reset_article, onCompleteScope:this, overwrite:2}); 
+    },
+
+    
+    reset_article : function () {
+        $('#gallery_overlay').remove();
+    },
+
+    nav : function (type) {
+        
+        var thisobj = this;
+
+        site.trace("nav type = "+type);
+
+        this.close_article();
+
+        if(type == "close") return;
+
+        if(type == "left") {
+            this.new = this.current-1;
+        } else {
+            this.new = this.current+1;
+        }
+        if(this.new < 0) this.new = this.data.length-1;
+        if(this.new > this.data.length-1) this.new = 0;
+
+        TweenMax.delayedCall(.55, thisobj.open_article, [this.data[this.new].id], this);
+    },
+
     share_article : function (type, id) {
         
         site.trace("share_article type = "+type+" id = "+id);
@@ -232,17 +273,14 @@ site.gallery = {
         var i;
         for (i = 0; i < this.data.length; i++) {
             if(this.data[i].id == id) {
-                var url = site.site_url+"/"+this.id+"/"+this.data[i].id;
-                var img = this.data[i].img;
-                var desc = this.data[i].title + " " +this.data[i].desc;   
+                var url = "http://"+site.site_url+"/"+this.id+"/"+this.data[i].id;
+                var img = this.data[i].img.url;
+                var desc = "%23"+site.hashtag+" "+this.data[i].title + " " +this.data[i].desc;   
 
                 site.share(type,id,url,img,desc);
             }
         }
 
-    },
-    reset_article : function () {
-        $('#gallery_overlay').remove();
     },
 
     img_loaded : function (val) {

@@ -16,6 +16,7 @@ site.team = {
     transition_entry:-1,
     direction:"right",
     device_state:"",
+    current:0,
 	initialize : function () {
 
 
@@ -49,7 +50,7 @@ site.team = {
 
         site.trace("site.segments[1] = "+site.segments[1]+" site.segments[2] = "+site.segments[2]);
         if(site.segments[1] == "castcrew" && site.segments[2] != "") {
-            TweenMax.delayedCall(1, thisobj.open_team, [site.segments[2]], this);
+            TweenMax.delayedCall(1, thisobj.open_article, [site.segments[2]], this);
         }
 
         this.set_btns();
@@ -238,19 +239,16 @@ site.team = {
         });
     },
 
-    open_team : function (val) {
-        site.trace("open_team val = "+val)
+    open_article : function (val) {
+        site.trace("open_article val = "+val)
 
         var i;
         var thisobj = this;
 
         if(this.article_open) {
 
-            site.set_url("castcrew");
+            this.close_article();
 
-            this.article_open = false;
-
-            TweenMax.to($('#team_overlay'), .5, {height:0, ease:"Power1.easeInOut", onComplete:this.reset_article, onCompleteScope:this, overwrite:2}); 
         } else {
 
             
@@ -265,7 +263,15 @@ site.team = {
                     
                     $('#team_overlay').append('<div id="team_nav"></div>');
                     $('#team_nav').append('<div id="team_nav_img"><img src="'+site.cdn+'/images/team_header.png"></div>');
-                    $('#team_nav').append('<div id="team_article_close" class="fa fa-arrow-circle-right" ></div>');
+                    $('#team_nav').append('<div type="right" class="team_article_btn fa fa-arrow-circle-right" ></div>');
+                    $('#team_nav').append('<div type="close" class="team_article_btn fa fa-times" ></div>');
+                    $('#team_nav').append('<div type="left" class="team_article_btn fa fa-arrow-circle-left" ></div>');
+
+                    $('.team_article_btn').click(function(event){
+                        var type = $(this).attr('type');
+                        thisobj.nav(type);
+                    });
+
 
                     $('#team_overlay').append('<div id="team_article"></div>');
                     $('#team_article').append('<div id="team_article_img"></div>');
@@ -292,12 +298,11 @@ site.team = {
 
                     $('#team_article_top .team_share').append('<div entryid="'+this.data[i].id+'" type="twitter" class="team_share_btn"><span class="fa fa-twitter" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
 
-                    $('#team_article_top .team_share').append('<div entryid="'+this.data[i].id+'" type="pinterest" class="team_share_btn"><span class="fa fa-pinterest" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
+                    $('#team_article_top .team_share').append('<div entryid="'+this.data[i].id+'" type="google" class="team_share_btn"><span class="fa fa-google" aria-hidden="true" ></span><span class="screen-reader-text">Google</span></div>');
 
-                    $('#team_article_top .team_share').append('<div entryid="'+this.data[i].id+'" type="google" class="team_share_btn"><span class="fa fa-google" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
+                    $('#team_article_top .team_share').append('<div entryid="'+this.data[i].id+'" type="pinterest" class="team_share_btn"><span class="fa fa-pinterest" aria-hidden="true" ></span><span class="screen-reader-text">Pinterest</span></div>');
 
-
-                    $('#team_article_top .team_share').append('<div entryid="'+this.data[i].id+'" type="tumblr" class="team_share_btn"><span class="fa fa-tumblr" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
+                    $('#team_article_top .team_share').append('<div entryid="'+this.data[i].id+'" type="tumblr" class="team_share_btn"><span class="fa fa-tumblr" aria-hidden="true" ></span><span class="screen-reader-text">Tumblr</span></div>');
 
                      $('.team_share_btn').click(function(event){
                         var type = $(this).attr('type');
@@ -319,16 +324,13 @@ site.team = {
 
          
 
-                    $('#team_article_close').click(function(event){
-                        thisobj.open_team();
-                        });
 
                     if(site.device == "desktop") {
-                        $('#team_article_close').mouseenter(function (event){  
+                        $('.team_article_btn').mouseenter(function (event){  
                            TweenMax.to($( this ), .25, {color:"#d90e0e", ease:"Power1.easeInOut", overwrite:2}); 
                         });
 
-                        $('#team_article_close').mouseleave(function (event){  
+                        $('.team_article_btn').mouseleave(function (event){  
                             TweenMax.to($( this ), .5, {color:"#000", ease:"Power1.easeInOut", overwrite:2}); 
                         });      
                     }
@@ -336,6 +338,7 @@ site.team = {
                     new_content.src = img;
                     
                     this.resize();
+                    this.current = i;
                 }
             }
 
@@ -343,6 +346,19 @@ site.team = {
             
         }
 
+    },
+
+    close_article : function () {
+
+        site.set_url('castcrew');
+
+        this.article_open = false;
+
+        TweenMax.to($('#team_overlay'), .5, {height:0, ease:"Power1.easeInOut", onComplete:this.reset_article, onCompleteScope:this, overwrite:2}); 
+    },
+
+    reset_article : function () {
+        $('#team_overlay').remove();
     },
 
     share_article : function (type, id) {
@@ -353,16 +369,34 @@ site.team = {
         for (i = 0; i < this.data.length; i++) {
             if(this.data[i].id == id) {
                 var url = site.site_url+"/"+this.id+"/"+this.data[i].id;
-                var img = this.data[i].img;
-                var desc = this.data[i].title + " " +this.data[i].desc;   
+                var img = this.data[i].img['sizes']['share'];
+                var desc = this.data[i].title + " " +this.data[i].bio;   
 
                 site.share(type,id,url,img,desc);
             }
         }
 
     },
-    reset_article : function () {
-        $('#team_overlay').remove();
+
+     nav : function (type) {
+        
+        var thisobj = this;
+
+        site.trace("nav type = "+type);
+
+        this.close_article();
+
+        if(type == "close") return;
+
+        if(type == "left") {
+            this.new = this.current-1;
+        } else {
+            this.new = this.current+1;
+        }
+        if(this.new < 0) this.new = this.data.length-1;
+        if(this.new > this.data.length-1) this.new = 0;
+
+        TweenMax.delayedCall(.55, thisobj.open_article, [this.data[this.new].id], this);
     },
 
     img_loaded : function (val) {
@@ -381,7 +415,7 @@ site.team = {
         $('#team_holder a').click(function(event){
             event.preventDefault();
             var id = $(this).attr('entry_id');
-            thisobj.open_team(id);
+            thisobj.open_article(id);
         });
 
 
@@ -442,12 +476,8 @@ site.team = {
             
             entry_count++;
 
-                
-
-            
         }
 
-        
             
     },
 
@@ -467,131 +497,5 @@ site.team = {
         if(site.device == "mobile") value = site.window_width() * .05;
         return value;
     }, 
-
-
-
-
-    team_holder_w : function () {
-        var value = 1364 * site.scale();;
-        if(site.device == "mobile") value = site.window_width() * .7;
-        return value;
-    },
-
-    team_article_close_size : function () {
-        var value = 36 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .08;
-        return value;
-    },
-
-    team_article_close_leading : function () {
-        var value = 75 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .1;
-        return value;
-    }, 
-
-    team_article_desc_size : function () {
-        var value = 16 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .04;
-        return value;
-    },
-
-    team_article_desc_leading : function () {
-        var value = 32 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .07;
-        return value;
-    }, 
-
-    team_article_title_size : function () {
-        var value = 55 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .08;
-        return value;
-    },
-
-    team_article_title_leading : function () {
-        var value = 75 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .1;
-        return value;
-    }, 
-
-    team_article_img_rb : function () {
-        var value = 25 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .02;
-        return value;
-    },
-
-    team_article_img_w : function () {
-        var value = 600 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * 1;
-        return value;
-    },
-
-    team_read_more_size : function () {
-        var value = 33 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .06;
-        return value;
-    },
-
-    team_read_more_leading : function () {
-        var value = 48 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .09;
-        return value;
-    }, 
-
-
-
-    team_desc_size : function () {
-        var value = 16 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .04;
-        return value;
-    }, 
-
-    team_desc_leading : function () {
-        var value = 24 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .05;
-        return value;
-    }, 
-
-    team_title_size : function () {
-        var value = 66 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .09;
-        return value;
-    }, 
-
-    team_title_leding : function () {
-        var value = 60 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .12;
-        return value;
-    }, 
-
-    team_title_t: function () {
-        var value = 10 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .03;
-        return value;
-    }, 
-
-    
-
-    team_img_h : function () {
-        var value = (216/400) * this.team_img_w();
-        return value;
-    },  
-
-    arrow_tb : function () {
-        var value = 240 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .5;
-        return value;
-    }, 
-
-    arrow_w : function () {
-        var value = 68 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .1;
-        return value;
-    },  
-
-    arrow_h : function () {
-        var value = (114/68) * this.arrow_w();
-        return value;
-    },  
-    
 
 };

@@ -137,19 +137,18 @@
 	color: #000;
 }
 
-#videos_article_close {
+.videos_article_btn {
 	float: right;
 	display:inline-block;
 	vertical-align: middle;
 	cursor: pointer;
-	font-size: 5rem;
-	line-height: 5rem;
-	margin: 2.5rem 3rem 0 0;
-	color: #000;
+	font-size: 6rem;
+	line-height: 7rem;
+	margin: 1.6rem 3rem 0 0;
 }
 
 @media (min-width: 900px) { 
-	#videos_article_close {
+	.videos_article_btn {
 		float: right;
 		display:inline-block;
 		vertical-align: middle;
@@ -159,7 +158,6 @@
 		margin: 1.5rem 3rem 0 0;
 	}
 }
-
 #videos_nav_img {
 	float: left;
 	vertical-align: middle;
@@ -222,7 +220,7 @@
 	}
 }
 
-p {
+.videos_article_desc p {
 	margin:1.5rem;
 }
 

@@ -10,7 +10,7 @@ var site = {
     meta_title:"",
     meta_desc:"",
     device:"",
-    share_hash:"RockBox",
+    hashtag:"FirstComesLike",
     user_agent:"",
     segments:[],
     pin:'',
@@ -266,15 +266,23 @@ var site = {
 
         desc = desc.replace(/(<([^>]+)>)/ig,"").replace(/”/g,"").replace(/“/g,"");
 
+        site.trace("desc = "+desc)
         if(type == "like") {
             site.trace("liked");
         }
 
-        if(type == "reblog") {
-            site.trace("reblogged");
-            var reblog_url = ' https://www.tumblr.com/reblog/'+id;
-            //119552612740
-            window.open(reblog_url, "_self");
+        if(type == "tumblr") {
+            site.trace("tumblr bitches!");
+            var share_txt = desc;;
+            var share_url = url;
+            var share_img = img;
+            share_txt = encodeURIComponent(share_txt);
+            share_url = encodeURIComponent(share_url);
+            share_img = encodeURIComponent(share_img);
+            var network_url = 'https://www.tumblr.com/share/link?url='+share_url;
+            //network_url = encodeURIComponent(network_url);
+            site.trace('tumblr network_url ========= '+network_url)
+            window.open(network_url, "tumblr_share", "width=500, height=600");
 
         }
 
@@ -297,7 +305,7 @@ var site = {
 
             var character_max = 240;
             var characters_over = 0;
-            var message_string = share_txt + " " +share_url+ " " + this.share_hash;
+            var message_string = share_txt + " " +share_url;
             if(message_string.length > character_max) {
                 characters_over = message_string.length - character_max + 3;
                 share_txt = share_txt.substring(0, share_txt.length - characters_over);
@@ -306,7 +314,8 @@ var site = {
                 //share_txt = encodeURIComponent(share_txt);
             }
             site.trace('twitter share_url ========= '+share_url)
-	    	var network_url = "http://twitter.com/share?text="+share_txt+"&url="+share_url;
+	    	var network_url = "https://twitter.com/intent/tweet?text="+share_txt+"&url="+share_url;
+            //network_url = encodeURIComponent(network_url);
             site.trace('twitter network_url ========= '+network_url)
             //network_url = encodeURIComponent(network_url);
 	    	window.open(network_url, "twitter_share", "width=600, height=400");
@@ -319,12 +328,13 @@ var site = {
 	    	window.open(network_url, "google_share", "width=600, height=600");
 	    }
 
-	    if(type == "pintrest") {
+	    if(type == "pinterest") {
             var share_txt = desc;
 	    	var share_url = url;
 	    	site.trace("share_url = "+share_url)
 	    	share_url = encodeURIComponent(share_url);
             var network_url = "http://pinterest.com/pin/create/button/?url="+share_url+"&description="+share_txt+"&media="+img;
+
 	    	window.open(network_url, "pintrest_share", "width=600, height=600");
 	    }
 

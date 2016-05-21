@@ -40,11 +40,17 @@ img {
 
 p {
 	display: block;
-	-webkit-margin-before: 0em;
-	-webkit-margin-after: 0em;
-	-webkit-margin-start: 0px;
-	-webkit-margin-end: 0px;
+	-webkit-margin-before: 1.5rem;
+	-webkit-margin-after:1.5rem;
+	-webkit-margin-start: 1.5rem;
+	-webkit-margin-end: 1.5rem;
 }
+img.alignright { float: right; margin: 0 0 1em 1em; }
+img.alignleft { float: left; margin: 0 1em 1em 0; }
+img.aligncenter { display: block; margin-left: auto; margin-right: auto; }
+.alignright { float: right; }
+.alignleft { float: left; }
+.aligncenter { display: block; margin-left: auto; margin-right: auto; }
 
 @font-face {
     font-family: 'sitefont';
@@ -74,7 +80,7 @@ a:active {
 
 a:hover {
 	border: none;
-	color: #fff;
+	color: #d90e0e;
 	text-decoration: underline;
 }
 

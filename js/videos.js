@@ -10,9 +10,9 @@ site.videos = {
     set_start:-2,
     set_end:-1,
     set_total:2,
-    overlay_open:false,
+    article_open:false,
     loading:false,
-
+    current:0,
     initialize : function () {
 
 
@@ -33,7 +33,7 @@ site.videos = {
         $('#videos a').click(function(event){
             event.preventDefault();
             var id = $(this).attr('entry_id');
-            thisobj.open_videos(id);
+            thisobj.open_article(id);
         });
 
         $('#load_more_videos_btn').click(function(event){
@@ -55,7 +55,7 @@ site.videos = {
 
         site.trace("site.segments[1] = "+site.segments[1]+" site.segments[2] = "+site.segments[2]);
         if(site.segments[1] == "videos" && site.segments[2] != "") {
-            TweenMax.delayedCall(1, thisobj.open_videos, [site.segments[2]], this);
+            TweenMax.delayedCall(1, thisobj.open_article, [site.segments[2]], this);
         }
         
     },
@@ -112,19 +112,15 @@ site.videos = {
     
     },
 
-    open_videos : function (val) {
-        site.trace("open_videos val = "+val)
+    open_article : function (val) {
+        site.trace("open_article val = "+val)
 
         var i;
         var thisobj = this;
 
-        if(this.overlay_open) {
+        if(this.article_open) {
 
-            site.set_url("videos");
-
-            this.overlay_open = false;
-
-            TweenMax.to($('#videos_overlay'), .5, {height:0, ease:"Power1.easeInOut", onComplete:this.reset_article, onCompleteScope:this, overwrite:2}); 
+            
         } else {
 
             
@@ -139,15 +135,22 @@ site.videos = {
                     
                     $('#videos_overlay').append('<div id="videos_nav"></div>');
                     $('#videos_nav').append('<div id="videos_nav_img"><img src="'+site.cdn+'/images/videos_header.png"></div>');
-                    $('#videos_nav').append('<div id="videos_article_close" class="fa fa-arrow-circle-right" ></div>');
+                    $('#videos_nav').append('<div type="right" class="videos_article_btn fa fa-arrow-circle-right" ></div>');
+                    $('#videos_nav').append('<div type="close" class="videos_article_btn fa fa-times" ></div>');
+                    $('#videos_nav').append('<div type="left" class="videos_article_btn fa fa-arrow-circle-left" ></div>');
+
+                    $('.videos_article_btn').click(function(event){
+                        var type = $(this).attr('type');
+                        thisobj.nav(type);
+                    });
 
                     $('#videos_overlay').append('<div id="videos_article"></div>');
                     $('#videos_article').append('<div id="videos_article_img"></div>');
 
                     site.trace("this.data[i].type = "+this.data[i].type)
-                    if(this.data[i].type == "youtube") $('#videos_article_img').append('<iframe width="100%" height="100%" src="https://www.youtube.com/embed/'+this.data[i].youtube+'?rel=0" frameborder="0" allowfullscreen></iframe>');
+                    if(this.data[i].type == "youtube") $('#videos_article_img').append('<iframe width="100%" height="100%" src="https://www.youtube.com/embed/'+this.data[i].video_id+'?rel=0" frameborder="0" allowfullscreen></iframe>');
 
-                    if(this.data[i].type == "vimeo") $('#videos_article_img').append('<iframe src="https://player.vimeo.com/video/167134574" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
+                    if(this.data[i].type == "vimeo") $('#videos_article_img').append('<iframe src="https://player.vimeo.com/video/'+this.data[i].video_id+'" width="100%" height="100%" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>');
 
                     $('#videos_article').append('<span id="videos_article_top"></span>');
                     $('#videos_article_top').append('<span class="videos_article_title">'+this.data[i].title+'</span>');
@@ -157,7 +160,7 @@ site.videos = {
          
 
                     $('#videos_article_close').click(function(event){
-                        thisobj.open_videos();
+                        thisobj.open_article();
                         });
 
                     if(site.device == "desktop") {
@@ -172,6 +175,8 @@ site.videos = {
                            
                     this.open_overlay();
                     this.resize();
+
+                    this.current = i;
                 }
             }
 
@@ -180,13 +185,46 @@ site.videos = {
         }
 
     },
+
+    close_article : function () {
+
+        site.set_url("videos");
+
+        this.article_open = false;
+
+        TweenMax.to($('#videos_overlay'), .5, {height:0, ease:"Power1.easeInOut", onComplete:this.reset_article, onCompleteScope:this, overwrite:2}); 
+    },
+
+    
     reset_article : function () {
         $('#videos_overlay').remove();
     },
 
+    nav : function (type) {
+        
+        var thisobj = this;
+
+        site.trace("nav type = "+type);
+
+        this.close_article();
+
+        if(type == "close") return;
+
+        if(type == "left") {
+            this.new = this.current-1;
+        } else {
+            this.new = this.current+1;
+        }
+        if(this.new < 0) this.new = this.data.length-1;
+        if(this.new > this.data.length-1) this.new = 0;
+
+        TweenMax.delayedCall(.55, thisobj.open_article, [this.data[this.new].id], this);
+    },
+
+
     open_overlay : function (val) {
 
-        this.overlay_open = true;
+        this.article_open = true;
 
         TweenMax.to($('#videos_overlay'), .5, {height:site.window_height(), ease:"Power1.easeInOut", overwrite:2}); 
 

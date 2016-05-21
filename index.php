@@ -106,7 +106,6 @@
 				$meta_title = $meta_title . " : " . $t['title'];
 				if($t['bio'] != "") $meta_desc = substr(strip_tags($t['bio']), 0, 300);
 				$meta_img  = $t['img']['sizes']['share'];
-				echo $meta_img;
 			}	
 		}		
 
@@ -194,6 +193,15 @@
 </head>
 
 <body>
+	<!-- Google Tag Manager -->
+	<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TLLFJ8"
+	height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+	new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+	j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+	'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+	})(window,document,'script','dataLayer','GTM-TLLFJ8');</script>
+	<!-- End Google Tag Manager -->
 
 	<?php 
 		include 'includes/nav.php';

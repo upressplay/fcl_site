@@ -47,6 +47,7 @@
 	margin-right: 3rem;
 	display: inline-block;
 	vertical-align: middle;
+	overflow: hidden;
 }
 
 .soundtrack_info {

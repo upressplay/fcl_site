@@ -127,6 +127,7 @@ class json_api_sitedata_controller {
 				'desc' => get_field('news_desc'),
 				'short_desc' => get_field('news_short_desc'),
 				'ext_link' => get_field('news_ext_link'),
+				'videos' => get_field('news_videos'),
 				);
 			$data[] = $entry;
 		endwhile;

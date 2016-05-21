@@ -21,6 +21,7 @@ if ( function_exists( 'add_image_size' ) ) add_theme_support( 'post-thumbnails' 
 	add_image_size( 'news-display', 1600, 686, true );
 	add_image_size( 'team-thumb', 300, 129, true );
 	add_image_size( 'team-display', 1600, 686, true );
+	add_image_size( 'soundtrack-thumb', 250, 250, true );
 	add_image_size( 'share', 1200, 630, true );
 }
 

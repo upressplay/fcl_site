@@ -30,6 +30,14 @@ site.nav = {
 
         var thisobj = this;
 
+        $('nav').css({
+            "display":"block"
+            });
+
+        TweenMax.set($('nav'), {opacity:0}); 
+
+        TweenMax.to($('nav'), .5, {opacity:1, overwrite:2}); 
+
         $( "nav a" ).add( "footer a" ).click(function( event ) {
 
             event.preventDefault();

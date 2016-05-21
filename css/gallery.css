@@ -7,7 +7,7 @@
 	width: 100%;
 	color: #000;
 	text-align: center;
-	padding:3% 0;
+	padding:2% 0 2% 0;
 }
 
 
@@ -70,18 +70,18 @@
 	color: #000;
 }
 
-#gallery_article_close {
+.gallery_article_btn {
 	float: right;
 	display:inline-block;
 	vertical-align: middle;
 	cursor: pointer;
-	font-size: 5rem;
-	line-height: 5rem;
-	margin: 1.5rem 3rem 0 0;
+	font-size: 6rem;
+	line-height: 7rem;
+	margin: 1.6rem 3rem 0 0;
 }
 
 @media (min-width: 900px) { 
-	#gallery_article_close {
+	.gallery_article_btn {
 		float: right;
 		display:inline-block;
 		vertical-align: middle;
@@ -154,7 +154,7 @@
 	}
 }
 
-p {
+.gallery_article_desc p {
 	margin:1.5rem;
 }
 
@@ -168,7 +168,6 @@ p {
 
 @media (min-width: 900px) { 
 	#load_more_gallery {
-		height: 6rem;
 	}
 }
 

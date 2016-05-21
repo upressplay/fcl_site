@@ -7,7 +7,7 @@ $(document).ready(function(){
 site.instagram = {
     instagram_data:[],
     client_id:'518317687f144d9cb634b6b005b800e1',
-    instagram_user:'6degreeschicago',
+    instagram_user:'firstcomeslike',
     max_entries:10,
 	initialize : function () {
 
@@ -27,7 +27,7 @@ site.instagram = {
 
     	this.resize();
 
-        this.get_instagram();
+        //this.get_instagram();
   
     },
 

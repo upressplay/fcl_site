@@ -8,7 +8,7 @@
 		foreach ( $soundtrack_data as $s ) {
 			echo '<div id="'.$s['id'].'" class="soundtrack inactive">';
 				echo '<div class="soundtrack_img">';
-					echo '<img src="'.$s['img'].'">';
+					echo '<img src="'.$s['img']['sizes']['soundtrack-thumb'].'">';
 				echo '</div><!-- soundtrack_img -->';
 				echo '<div class="soundtrack_info">';
 					echo '<div class="soundtrack_title">';

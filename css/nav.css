@@ -4,6 +4,7 @@ nav {
 	background-color: #fff;
 	overflow: hidden;
 	z-index: 1000;
+	display: none;
 }
 @media (min-width: 900px) { 
 	nav {
