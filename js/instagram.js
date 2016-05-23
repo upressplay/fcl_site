@@ -27,6 +27,8 @@ site.instagram = {
 
     	this.resize();
 
+
+
         this.get_instagram();
   
     },
@@ -90,7 +92,7 @@ site.instagram = {
 
         //site.trace("build_instagram_posts")
 
-        if(this.instagram_data.length < 10) this.max_entries = 5;
+        if(this.instagram_data.length < 10) this.max_entries = this.instagram_data.length-1;
         var i;
         
         for (i = 0; i < this.instagram_data.length; i++) {

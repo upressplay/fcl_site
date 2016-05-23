@@ -1,21 +1,29 @@
 <footer id="footer">
-  <div id="footer_nav"><a href="http://6degreesinc.com/" target="_self">
+  <div id="footer_nav">
+
+    <a href="/" target="_self">
     <div class="footer_nav_btn">home</div>
     <!-- home --></a>
+    
+    <a href="/about/" target="_self">
+    <div class="footer_nav_btn">about</div>
+    <!-- about --></a>
+    
     <a href="/gallery/" target="_self">
     <div class="footer_nav_btn">gallery</div>
     <!-- positions --></a>
-    <a href="/videos" target="_self">
+    <a href="/videos/" target="_self">
     <div class="footer_nav_btn">videos</div>
     <!-- apply --></a>
-    <a href="http://6degreesinc.com/about/" target="_self">
-    <div class="footer_nav_btn">about</div>
-    <!-- about --></a>
-    <a href="http://6degreesinc.com/castcrew/" target="_self">
+    
+    <a href="/castcrew/" target="_self">
     <div class="footer_nav_btn">castcrew</div>
     <!-- team --></a>
 
-    <a href="http://6degreesinc.com/news/" target="_self">
+    <a href="/soundtrack/" target="_self">
+    <div class="footer_nav_btn">soundtrack</div>
+    <!-- soundtrack --></a>
+    <a href="/news/" target="_self">
     <div class="footer_nav_btn">news</div>
     <!-- news --></a>
 

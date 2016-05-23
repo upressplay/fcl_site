@@ -9,7 +9,9 @@
     <div id="nav_holder">
     	
 
-      
+      <a href="/" target="_self">
+      <div class="nav_btn">Home</div>
+      <!-- home --></a>
 
       <a href="/about/" target="_self">
       <div class="nav_btn">About</div>

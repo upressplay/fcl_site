@@ -10,7 +10,7 @@ site.nav = {
     data:[],
     loading:false,
     open:false,
-    scroll_urls:['/about/','/castcrew/','/gallery/', '/news/','/videos/', '/soundtrack/'],
+    scroll_urls:['/about/','/castcrew/','/gallery/', '/news/','/videos/', '/soundtrack/','/'],
     initialize : function () {
 
         var thisobj = this;
@@ -103,7 +103,7 @@ site.nav = {
                 href = href.replace('/','');
                 href = href.replace('/','');
                 this.btn_set_url(href);
-                if(site.device == "mobile") this.toggle();
+                if(this.open) this.toggle();
                 return;
             }   
         }
@@ -126,10 +126,10 @@ site.nav = {
     btn_set_url : function (id) {
 
         site.trace("btn_set_url id = "+id)
-        if(id == "") id = 'home';
+        if(id == "") id = 'header';
         
         site.scroll_to('#'+id);
-        if(id == "home") id = '';
+        if(id == "header") id = '';
         site.set_url(id)
     },
 

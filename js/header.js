@@ -38,7 +38,7 @@ site.header = {
 
         $('#header_btn').click(function(event){
             var id = $(this).attr('entryid');
-            site.videos.open_videos(id);
+            site.videos.open_article(id);
         });
 
         if(site.device == "desktop") {
