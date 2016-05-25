@@ -257,25 +257,45 @@ var site = {
         
     },
 
-    share : function (type, id, url, img, desc) {
-    	site.trace("share type = "+type+" id = "+id+" url = "+url+" img = "+img+" desc = "+desc)
+    share : function (options) {
+        site.trace("share")
 
-    	var title = "Ready to rock? From April 4 to May 22 you can win a RockBox every time you dine at Hard Rock Cafe. Though some boxes are more epic than others, all winners will have the chance to jet around the world to the a Hard Rock destination of their choice.  ";
-
-        if(desc == "" || desc == undefined || desc == null) desc = title;
-
-        desc = desc.replace(/(<([^>]+)>)/ig,"").replace(/”/g,"").replace(/“/g,"");
-
-        site.trace("desc = "+desc)
-        if(type == "like") {
-            site.trace("liked");
+        for (var prop in options) {
+          this.trace("options." + prop + " = " + options[prop]);
         }
 
-        if(type == "tumblr") {
-            site.trace("tumblr bitches!");
-            var share_txt = desc;;
-            var share_url = url;
-            var share_img = img;
+        var title = "Ready to rock? From April 4 to May 22 you can win a RockBox every time you dine at Hard Rock Cafe. Though some boxes are more epic than others, all winners will have the chance to jet around the world to the a Hard Rock destination of their choice.  ";
+
+        if(options.desc == "" || options.desc == undefined || options.desc == null) options.desc = title;
+
+        options.desc = options.desc.replace(/(<([^>]+)>)/ig,"").replace(/”/g,"").replace(/“/g,"");
+
+        site.trace("desc post replace")
+
+        site.trace("options.desc = "+options.desc)
+
+        if(options.type == "linkedin") {
+            var share_url = options.url;
+            share_url = encodeURIComponent(share_url);
+            var network_url = "https://www.linkedin.com/shareArticle?mini=true&url="+share_url+"&title="+options.title+"&summary="+options.desc+"&source="+options.img;
+            window.open(network_url, "linkedin_share", "width=600, height=400");
+        }
+
+        if(options.type == "instagram") {
+            site.trace("instagram");
+        }
+
+        if(options.type == "facebook") {
+            var share_url = options.url;
+            share_url = encodeURIComponent(share_url);
+            var network_url = "https://www.facebook.com/sharer/sharer.php?u="+share_url;
+            window.open(network_url, "facebook_share", "width=600, height=400");
+        }
+
+        if(options.type == "tumblr") {
+            var share_txt = options.title+" "+options.desc;
+            var share_url = options.url;
+            var share_img = options.img;
             share_txt = encodeURIComponent(share_txt);
             share_url = encodeURIComponent(share_url);
             share_img = encodeURIComponent(share_img);
@@ -285,27 +305,17 @@ var site = {
             window.open(network_url, "tumblr_share", "width=500, height=600");
 
         }
+        
 
-        if(type == "instagram") {
-            site.trace("instagram");
-        }
-
-	    if(type == "facebook") {
-	    	var share_url = url;
-	    	share_url = encodeURIComponent(share_url);
-	    	var network_url = "https://www.facebook.com/sharer/sharer.php?u="+share_url;
-	    	window.open(network_url, "facebook_share", "width=600, height=400");
-	    }
-
-	    if(type == "twitter") {
-	    	var share_txt = desc;
-            var share_url = url;
+        if(options.type == "twitter") {
+            var share_txt = options.title+" "+options.desc;
+            var share_url = options.url;
             site.trace('twitter share_url ========= '+share_url)
-	    	//share_url = encodeURIComponent(share_url);
+            //share_url = encodeURIComponent(share_url);
 
             var character_max = 240;
             var characters_over = 0;
-            var message_string = share_txt + " " +share_url;
+            var message_string = share_txt + " " +share_url+ " " + this.share_hash;
             if(message_string.length > character_max) {
                 characters_over = message_string.length - character_max + 3;
                 share_txt = share_txt.substring(0, share_txt.length - characters_over);
@@ -314,33 +324,32 @@ var site = {
                 //share_txt = encodeURIComponent(share_txt);
             }
             site.trace('twitter share_url ========= '+share_url)
-	    	var network_url = "https://twitter.com/intent/tweet?text="+share_txt+"&url="+share_url;
-            //network_url = encodeURIComponent(network_url);
+            var network_url = "http://twitter.com/share?text="+share_txt+"&url="+share_url;
             site.trace('twitter network_url ========= '+network_url)
             //network_url = encodeURIComponent(network_url);
-	    	window.open(network_url, "twitter_share", "width=600, height=400");
-	    }
+            window.open(network_url, "twitter_share", "width=600, height=400");
+        }
 
-	    if(type == "google") {
-	    	var share_url = url;
-	    	share_url = encodeURIComponent(share_url);
-	    	var network_url = "https://plus.google.com/share?url="+share_url;
-	    	window.open(network_url, "google_share", "width=600, height=600");
-	    }
+        if(options.type == "google") {
+            var share_url = options.url;
+            share_url = encodeURIComponent(share_url);
+            var network_url = "https://plus.google.com/share?url="+share_url;
+            window.open(network_url, "google_share", "width=600, height=600");
+        }
 
-	    if(type == "pinterest") {
-            var share_txt = desc;
-	    	var share_url = url;
-	    	site.trace("share_url = "+share_url)
-	    	share_url = encodeURIComponent(share_url);
+        if(options.type == "pinterest") {
+            var share_txt = options.desc;
+            var share_url = options.url;
+            site.trace("share_url = "+share_url)
+            share_url = encodeURIComponent(share_url);
             var network_url = "http://pinterest.com/pin/create/button/?url="+share_url+"&description="+share_txt+"&media="+img;
+            window.open(network_url, "pintrest_share", "width=600, height=600");
+        }
 
-	    	window.open(network_url, "pintrest_share", "width=600, height=600");
-	    }
 
-
-        site.track({"share":type,"id":id, "event":"share_post"});
+        site.track({"share":options.type,"id":options.id, "event":"share_post"});
     },
+
 
     div_display : function (id,display) {
         //site.trace("div_display id = "+id+" display = "+display)

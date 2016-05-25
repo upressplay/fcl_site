@@ -119,7 +119,8 @@ site.videos = {
         var thisobj = this;
 
         if(this.article_open) {
-
+            
+            this.close_article();
             
         } else {
 
@@ -154,6 +155,36 @@ site.videos = {
 
                     $('#videos_article').append('<span id="videos_article_top"></span>');
                     $('#videos_article_top').append('<span class="videos_article_title">'+this.data[i].title+'</span>');
+
+                    $('#videos_article_top').append('<div class="videos_share">Share: </div>');
+
+
+                    $('#videos_article_top .videos_share').append('<div entryid="'+this.data[i].id+'" type="facebook" class="videos_share_btn"><span class="fa fa-facebook" aria-hidden="true" ></span><span class="screen-reader-text">Facebook</span></div>');
+
+                    $('#videos_article_top .videos_share').append('<div entryid="'+this.data[i].id+'" type="twitter" class="videos_share_btn"><span class="fa fa-twitter" aria-hidden="true" ></span><span class="screen-reader-text">Twitter</span></div>');
+
+                    $('#videos_article_top .videos_share').append('<div entryid="'+this.data[i].id+'" type="google" class="videos_share_btn"><span class="fa fa-google" aria-hidden="true" ></span><span class="screen-reader-text">Google</span></div>');
+
+                    $('#videos_article_top .videos_share').append('<div entryid="'+this.data[i].id+'" type="pinterest" class="videos_share_btn"><span class="fa fa-pinterest" aria-hidden="true" ></span><span class="screen-reader-text">Pinterest</span></div>');
+
+                    $('#videos_article_top .videos_share').append('<div entryid="'+this.data[i].id+'" type="tumblr" class="videos_share_btn"><span class="fa fa-tumblr" aria-hidden="true" ></span><span class="screen-reader-text">Tumblr</span></div>');
+
+                     $('.videos_share_btn').click(function(event){
+                        var type = $(this).attr('type');
+                        var id = $(this).attr('entryid');
+                        thisobj.share_article(type,id);
+                    });
+                    
+                    if(site.device == "desktop") {
+                        $('.videos_share_btn').mouseenter(function (event){  
+                           TweenMax.to($( this ), .25, {color:"#d90e0e", ease:"Power1.easeInOut", overwrite:2}); 
+                        });
+
+                        $('.videos_share_btn').mouseleave(function (event){  
+                            TweenMax.to($( this ), .5, {color:"#000", ease:"Power1.easeInOut", overwrite:2}); 
+                        });      
+                    }
+
                     
                     $('#videos_article').append('<span class="videos_article_desc">'+this.data[i].desc+'</span>');
 
@@ -200,6 +231,24 @@ site.videos = {
         $('#videos_overlay').remove();
     },
 
+    share_article : function (type, id) {
+        
+        site.trace("share_article type = "+type+" id = "+id);
+
+        var i;
+        for (i = 0; i < this.data.length; i++) {
+            if(this.data[i].id == id) {
+
+                var url = "http://"+site.site_url+"/"+this.id+"/"+this.data[i].id;
+                var img = this.data[i].img['sizes']['share'];
+                var title = this.data[i].title;   
+                var desc = this.data[i].desc;  
+                site.share({type:type, id:id, url:url, img:img, title:title, desc:desc});
+            }
+        }
+
+    },
+
     nav : function (type) {
         
         var thisobj = this;
@@ -242,147 +291,7 @@ site.videos = {
             
     },
 
-    videos_img_w : function () {
-        var value = 400 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .7;
-        return value;
-    }, 
-    videos_entry_tb : function () {
-        var value = 10 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .01;
-        return value;
-    }, 
-
-    videos_entry_lr : function () {
-        var value = 55 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .05;
-        return value;
-    }, 
-
-
-
-
-    videos_holder_w : function () {
-        var value = 1364 * site.scale();;
-        if(site.device == "mobile") value = site.window_width() * .7;
-        return value;
-    },
-
-    videos_article_close_size : function () {
-        var value = 36 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .08;
-        return value;
-    },
-
-    videos_article_close_leading : function () {
-        var value = 75 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .1;
-        return value;
-    }, 
-
-    videos_article_desc_size : function () {
-        var value = 16 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .04;
-        return value;
-    },
-
-    videos_article_desc_leading : function () {
-        var value = 32 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .07;
-        return value;
-    }, 
-
-    videos_article_title_size : function () {
-        var value = 55 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .08;
-        return value;
-    },
-
-    videos_article_title_leading : function () {
-        var value = 75 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .1;
-        return value;
-    }, 
-
-    videos_article_img_rb : function () {
-        var value = 25 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .02;
-        return value;
-    },
-
-    videos_article_img_w : function () {
-        var value = 600 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * 1;
-        return value;
-    },
-
-    videos_read_more_size : function () {
-        var value = 33 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .06;
-        return value;
-    },
-
-    videos_read_more_leading : function () {
-        var value = 48 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .09;
-        return value;
-    }, 
-
-
-
-    videos_desc_size : function () {
-        var value = 16 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .04;
-        return value;
-    }, 
-
-    videos_desc_leading : function () {
-        var value = 24 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .05;
-        return value;
-    }, 
-
-    videos_title_size : function () {
-        var value = 66 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .09;
-        return value;
-    }, 
-
-    videos_title_leding : function () {
-        var value = 60 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .12;
-        return value;
-    }, 
-
-    videos_title_t: function () {
-        var value = 10 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .03;
-        return value;
-    }, 
-
-    
-
-    videos_img_h : function () {
-        var value = (216/400) * this.videos_img_w();
-        return value;
-    },  
-
-    arrow_tb : function () {
-        var value = 240 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .5;
-        return value;
-    }, 
-
-    arrow_w : function () {
-        var value = 68 * site.scale();
-        if(site.device == "mobile") value = site.window_width() * .1;
-        return value;
-    },  
-
-    arrow_h : function () {
-        var value = (114/68) * this.arrow_w();
-        return value;
-    },  
+      
     
 
 };

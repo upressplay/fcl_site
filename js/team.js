@@ -368,11 +368,12 @@ site.team = {
         var i;
         for (i = 0; i < this.data.length; i++) {
             if(this.data[i].id == id) {
-                var url = site.site_url+"/"+this.id+"/"+this.data[i].id;
-                var img = this.data[i].img['sizes']['share'];
-                var desc = this.data[i].title + " " +this.data[i].bio;   
 
-                site.share(type,id,url,img,desc);
+                var url = "http://"+site.site_url+"/"+this.id+"/"+this.data[i].id;
+                var img = this.data[i].img['sizes']['share'];
+                var title = this.data[i].title;   
+                var desc = this.data[i].desc;  
+                site.share({type:type, id:id, url:url, img:img, title:title, desc:desc});
             }
         }
 

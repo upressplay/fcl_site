@@ -388,11 +388,11 @@ site.news = {
         var i;
         for (i = 0; i < this.data.length; i++) {
             if(this.data[i].id == id) {
-                var url = site.site_url+"/"+this.id+"/"+this.data[i].id;
-                var img = this.data[i].img['sizes']['share'];
-                var desc = this.data[i].title + " " +this.data[i].bio;   
-
-                site.share(type,id,url,img,desc);
+                var url = "http://"+site.site_url+"/"+this.id+"/"+this.data[i].id;
+                var img = this.data[i].img;
+                var title = this.data[i].title;   
+                var desc = this.data[i].desc;  
+                site.share({type:type, id:id, url:url, img:img, title:title, desc:desc});
             }
         }
 
@@ -416,8 +416,17 @@ site.news = {
         if(this.new < 0) this.new = this.data.length-1;
         if(this.new > this.data.length-1) this.new = 0;
 
+        site.trace("this.data[this.new].ext_link = "+this.data[this.new].ext_link)
         if(this.data[this.new].ext_link != "") {
-            this.nav(type);
+            if(type == "left") {
+                this.current = this.current-2;
+            } else {
+                this.current = this.current+2;
+            }
+            if(this.current < 0) this.current = this.data.length-1;
+            if(this.current > this.data.length-1) this.current = 0;
+            site.trace("this.current = "+this.current);
+            //this.nav(type);
             return;
         } 
 

@@ -273,11 +273,12 @@ site.gallery = {
         var i;
         for (i = 0; i < this.data.length; i++) {
             if(this.data[i].id == id) {
+
                 var url = "http://"+site.site_url+"/"+this.id+"/"+this.data[i].id;
                 var img = this.data[i].img.url;
-                var desc = "%23"+site.hashtag+" "+this.data[i].title + " " +this.data[i].desc;   
-
-                site.share(type,id,url,img,desc);
+                var title = "%23"+site.hashtag+" "+this.data[i].title;   
+                var desc = this.data[i].desc;  
+                site.share({type:type, id:id, url:url, img:img, title:title, desc:desc});
             }
         }
 
