@@ -17,6 +17,10 @@
       <div class="nav_btn">About</div>
       <!-- about --></a>
 
+      <a href="/videos/" target="_self">
+      <div class="nav_btn">Videos</div>
+      <!-- videos --></a>
+
       <a href="/gallery/" target="_self">
       <div class="nav_btn">Gallery</div>
       <!-- apply --></a>

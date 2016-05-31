@@ -45,7 +45,7 @@ site.news = {
             
 
         for (i = 0; i < this.news_set.length; i++) {
-            site.trace("this.news_set[i] = "+this.news_set[i])
+            //site.trace("this.news_set[i] = "+this.news_set[i])
         }
 
         site.trace("site.segments[1] = "+site.segments[1]+" site.segments[2] = "+site.segments[2]);
@@ -252,7 +252,7 @@ site.news = {
     },
 
     open_article : function (val) {
-        site.trace("open_article val = "+val)
+        //site.trace("open_article val = "+val)
 
         var i;
         var thisobj = this;
@@ -266,7 +266,7 @@ site.news = {
             
                 
             for (i = 0; i < this.data.length; i++) {
-                site.trace("this.data[i].id = "+this.data[i].id+" val = "+val)
+                //site.trace("this.data[i].id = "+this.data[i].id+" val = "+val)
                 if(this.data[i].id == val) {
                     $('body').prepend('<div id="news_overlay"></div>');
 
@@ -398,7 +398,7 @@ site.news = {
 
     },
 
-     nav : function (type) {
+    nav : function (type) {
         
         var thisobj = this;
 
@@ -416,21 +416,34 @@ site.news = {
         if(this.new < 0) this.new = this.data.length-1;
         if(this.new > this.data.length-1) this.new = 0;
 
+        site.trace("this.new = "+this.new)
+        site.trace("this.current = "+this.current)
+
         site.trace("this.data[this.new].ext_link = "+this.data[this.new].ext_link)
         if(this.data[this.new].ext_link != "") {
-            if(type == "left") {
-                this.current = this.current-2;
-            } else {
-                this.current = this.current+2;
-            }
-            if(this.current < 0) this.current = this.data.length-1;
-            if(this.current > this.data.length-1) this.current = 0;
-            site.trace("this.current = "+this.current);
-            //this.nav(type);
-            return;
+            this.skip(type); 
         } 
 
         TweenMax.delayedCall(.55, thisobj.open_article, [this.data[this.new].id], this);
+    },
+
+    skip : function (type) {
+
+        site.trace("");
+        site.trace("----------- skip type = "+type);
+
+        var i;
+        
+        if(type == "left") {
+            this.current = this.current-1;
+        } else {
+            this.current = this.current+1;
+        }
+        if(this.current < 0) this.current = this.data.length-1;
+        if(this.current > this.data.length-1) this.current = 0;
+
+        this.nav(type);
+        
     },
 
     img_loaded : function (val) {
@@ -507,11 +520,11 @@ site.news = {
 
         for (i = 0; i < this.news_set.length; i++) {
             
-            site.trace("=========      this.news_set[i] = "+this.news_set[i])
+            //site.trace("=========      this.news_set[i] = "+this.news_set[i])
 
             var entry_l = (this.news_entry_lr() + this.news_img_w()) * entry_count;
             
-            site.trace("entry_l = "+entry_l);
+            //site.trace("entry_l = "+entry_l);
 
             TweenMax.to($('#'+this.data[this.news_set[i]].id), .5, {left:entry_l+"px", top:this.news_entry_tb()+"px", opacity:1, ease:"Power1.easeInOut", overwrite:2}); 
             

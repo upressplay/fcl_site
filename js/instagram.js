@@ -39,7 +39,7 @@ site.instagram = {
 
        var thisobj = this;
 
-        site.trace("get_instagram")
+        //site.trace("get_instagram")
 
         var instagram_url = 'https://api.instagram.com/v1/users/search?q='+this.instagram_user+'&client_id='+this.client_id;
         
@@ -68,7 +68,7 @@ site.instagram = {
 
         var thisobj = this;
 
-        site.trace("get_instagram_data")
+        //site.trace("get_instagram_data")
 
         var instagram_url = 'https://api.instagram.com/v1/users/'+id+'/media/recent/?client_id='+this.client_id+'&count=24';
         
@@ -98,9 +98,8 @@ site.instagram = {
         for (i = 0; i < this.instagram_data.length; i++) {
 
             if(i < this.max_entries) {
-
                 
-                site.trace("this.instagram_data.data[i].id = "+this.instagram_data[i].images.low_resolution.url)  
+                //site.trace("this.instagram_data.data[i].id = "+this.instagram_data[i].images.low_resolution.url)  
 
                 $('#instagram').append('<div id="'+i+'_grid" class="instagram_grid"></div>'); 
 

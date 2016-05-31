@@ -106,7 +106,7 @@ site.videos = {
     },
 
     thumb_loaded : function (val) {
-        site.trace("thumb_loaded val = "+val)
+        //site.trace("thumb_loaded val = "+val)
         site.div_display('#'+this.data[val].id, "inline-block")
         TweenMax.to($('#'+this.data[val].id), .5, {opacity:1, ease:"Power1.easeInOut", ooverwrite:2}); 
     
