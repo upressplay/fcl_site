@@ -12,7 +12,7 @@
 	$meta_url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	
 	$meta_desc_default = "After they both swipe right, Jeff and Kate start to build a personal relationship through the most impersonal of ways--technology.  From flirty texting to their first Skype date, they find themselves drawn to each other but are scared of actually making the choice to meet in person.  Because in today's dating scene, first comes like and then comes, should we meet?";
-	$meta_desc = $meta_desc_default;
+	
 
 	$meta_img_default = $site_url . '/images/fcl.jpg';
 	$meta_img = $meta_img_default;
@@ -34,6 +34,8 @@
 		
 		$count++;
 	}
+
+	$meta_desc = $meta_desc_default;
 
 	$news_data  = file_get_contents('http://firstcomeslikemovie.com/wordpress/?json=sitedata/news');
 	$news_data = json_decode($news_data, true);	
