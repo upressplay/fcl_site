@@ -9,6 +9,7 @@ site.instagram = {
     client_id:'518317687f144d9cb634b6b005b800e1',
     instagram_user:'firstcomeslike',
     max_entries:10,
+    access_token:'',
 	initialize : function () {
 
 		this.render();
@@ -29,8 +30,33 @@ site.instagram = {
 
 
 
-        this.get_instagram();
+        this.get_token();
   
+    },
+
+    get_token : function () {
+
+        site.trace("get_token")
+
+        var thisobj = this;
+                
+        var url = 'https://www.instagram.com/oauth/authorize/?client_id='+this.client_id+'&redirect_uri=http://firstcomeslikemovie.com/&response_type=code';
+        
+        $.ajax({
+            method: "GET",
+            url: url,
+            dataType: "jsonp",
+            success: function(data) {
+                var string = JSON.stringify(data); 
+        
+                thisobj.access_token = data.access_token;
+
+                thisobj.get_instagram();
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                site.trace("errror")
+            }
+        });
     },
 
     
@@ -41,11 +67,11 @@ site.instagram = {
 
         //site.trace("get_instagram")
 
-        var instagram_url = 'https://api.instagram.com/v1/users/search?q='+this.instagram_user+'&client_id='+this.client_id;
+        var url = 'https://api.instagram.com/v1/users/search?q='+this.instagram_user+'&client_id='+this.client_id;
         
         $.ajax({
             method: "GET",
-            url: instagram_url,
+            url: url,
             dataType: "jsonp",
             success: function(data) {
                 var string = JSON.stringify(data); 
@@ -70,11 +96,11 @@ site.instagram = {
 
         //site.trace("get_instagram_data")
 
-        var instagram_url = 'https://api.instagram.com/v1/users/'+id+'/media/recent/?client_id='+this.client_id+'&count=24';
+        var url = 'https://api.instagram.com/v1/users/'+id+'/media/recent/?client_id='+this.client_id+'&count=24';
         
         $.ajax({
             method: "GET",
-            url: instagram_url,
+            url: url,
             dataType: "jsonp",
             success: function(data) {
                 var string = JSON.stringify(data); 

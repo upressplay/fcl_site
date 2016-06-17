@@ -219,7 +219,6 @@
 				include 'includes/team.php';
 				include 'includes/news.php';
 				include 'includes/soundtrack.php';
-				include 'includes/instagram.php';
 			?>
 			
 			<div id="credits">
@@ -271,7 +270,6 @@
 	<script src="/js/nav.js"></script>
   	<script src="/js/header.js"></script>
   	<script src="/js/news.js"></script>
-  	<script src="/js/instagram.js"></script>
   	<script src="/js/team.js"></script>
   	<script src="/js/gallery.js"></script>
   	<script src="/js/videos.js"></script>

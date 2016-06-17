@@ -66,8 +66,8 @@ site.videos = {
         this.set_end = this.set_end + this.set_total;
         if(this.set_end > this.data.length-1) this.set_end = this.data.length-1;
 
-        site.trace('load_more')
-        site.trace('this.set_start = '+this.set_start+" this.set_end = "+this.set_end)
+        //site.trace('load_more')
+        //site.trace('this.set_start = '+this.set_start+" this.set_end = "+this.set_end)
         this.set();
 
         
@@ -79,9 +79,9 @@ site.videos = {
         var thisobj = this;
 
         for (i = 0; i < this.data.length; i++) { 
-            site.trace("this.data[i].id = "+this.data[i].loaded+" i = "+i+" this.set_start = "+this.set_start+" this.set_end = "+this.set_end);
+            //site.trace("this.data[i].id = "+this.data[i].loaded+" i = "+i+" this.set_start = "+this.set_start+" this.set_end = "+this.set_end);
             if(i >= this.set_start && i <= this.set_end ) {
-                site.trace("Hey yo")
+                //site.trace("Hey yo")
 
                 var new_content = new Image();  
                 new_content.id = i;
@@ -91,7 +91,7 @@ site.videos = {
 
                 } 
                 var content_url = site.cdn+this.data[i].img['sizes']["video-thumb"];
-                site.trace("content_url = "+content_url)
+                //site.trace("content_url = "+content_url)
                 $('#'+this.data[i].id).find('.videos_thumb').append('<img src="'+content_url+'">')
 
 
