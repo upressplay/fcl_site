@@ -1,6 +1,3 @@
-
-
-
 #gallery {
 	float: left;
 	background-color: #fff;
@@ -9,7 +6,10 @@
 	text-align: center;
 	padding:2% 0 2% 0;
 }
-
+@media (min-width: 900px) { 
+	#gallery {
+	}
+}
 
 #gallery_title {
 	text-align: center;

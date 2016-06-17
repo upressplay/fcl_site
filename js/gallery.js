@@ -51,7 +51,7 @@ site.gallery = {
             });      
         }
 
-        site.trace(this.id+" this.data.length = "+this.data.length)
+        //site.trace(this.id+" this.data.length = "+this.data.length)
         if(this.data.length < 10) {
             this.set_total = 5;
 
@@ -63,7 +63,7 @@ site.gallery = {
         this.load_more();
         this.resize();
 
-        site.trace("site.segments[1] = "+site.segments[1]+" site.segments[2] = "+site.segments[2]);
+        //site.trace("site.segments[1] = "+site.segments[1]+" site.segments[2] = "+site.segments[2]);
         if(site.segments[1] == "gallery" && site.segments[2] != "") {
             TweenMax.delayedCall(1, thisobj.open_article, [site.segments[2]], this);
         }

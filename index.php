@@ -209,7 +209,7 @@
 		include 'includes/nav.php';
 	?>
 	<div id="site_holder">
-		
+		<div id="nav_spacer"></div>
 		<div id="site_container">
 			<?php 
 				include 'includes/header.php';

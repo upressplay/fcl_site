@@ -45,10 +45,10 @@ site.team = {
             
 
         for (i = 0; i < this.team_set.length; i++) {
-            site.trace("this.team_set[i] = "+this.team_set[i])
+            //site.trace("this.team_set[i] = "+this.team_set[i])
         }
 
-        site.trace("site.segments[1] = "+site.segments[1]+" site.segments[2] = "+site.segments[2]);
+        //site.trace("site.segments[1] = "+site.segments[1]+" site.segments[2] = "+site.segments[2]);
         if(site.segments[1] == "castcrew" && site.segments[2] != "") {
             TweenMax.delayedCall(1, thisobj.open_article, [site.segments[2]], this);
         }
@@ -96,14 +96,14 @@ site.team = {
             this.team_set.unshift(new_id);
         }
 
-        site.trace("next            new_id = "+new_id+" tthis.team_set.length = "+this.team_set.length)
+        //site.trace("next            new_id = "+new_id+" tthis.team_set.length = "+this.team_set.length)
         
 
         $('#team_holder').append('<a href="/team/'+this.data[new_id].id+'" entry_id="'+this.data[new_id].id+'"><div class="team_entry" id="'+this.data[new_id].id+'"></div></a>');
 
         var img_url = this.data[new_id].img['sizes']['team-thumb'];
 
-        site.trace("this.data[new_id].img = "+this.data[new_id].img)
+        //site.trace("this.data[new_id].img = "+this.data[new_id].img)
         var new_content = new Image();  
         new_content.id = new_id;
         new_content.onload = function () {   
@@ -161,7 +161,7 @@ site.team = {
             
             var img_url = this.data[new_id].img['sizes']['team-thumb'];
 
-            site.trace("this.data[new_id].img = "+this.data[new_id].img)
+            //site.trace("this.data[new_id].img = "+this.data[new_id].img)
 
             var new_content = new Image();  
             new_content.id = new_id;
@@ -226,14 +226,12 @@ site.team = {
     },
 
     remove_entry : function (id) {
-        site.trace("remove_entry id = "+id)
+        //site.trace("remove_entry id = "+id)
 
         $( "#team_holder a" ).each(function( index ) {
-
-
             
             var entry_id = $(this).attr('entry_id');
-            site.trace("entry_id = "+entry_id +" id = "+id)
+            //site.trace("entry_id = "+entry_id +" id = "+id)
 
             if(entry_id == id) $(this).remove();
         });

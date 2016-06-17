@@ -96,8 +96,8 @@ site.news = {
             this.news_set.unshift(new_id);
         }
 
-        site.trace("next            new_id = "+new_id+" tthis.news_set.length = "+this.news_set.length)
-        site.trace("this.data[new_id].ext_link = "+this.data[new_id].ext_link)
+        //site.trace("next            new_id = "+new_id+" tthis.news_set.length = "+this.news_set.length)
+        //site.trace("this.data[new_id].ext_link = "+this.data[new_id].ext_link)
         
         if(this.data[new_id].ext_link != "") {
             $('#news_holder').append('<a href="'+this.data[new_id].ext_link+'" entry_id="'+this.data[new_id].id+'" target="_blank"><div class="news_entry" id="'+this.data[new_id].id+'"></div></a>'); 
@@ -108,7 +108,7 @@ site.news = {
 
         var img_url = this.data[new_id].img['sizes']['news-thumb'];
 
-        site.trace("this.data[new_id].img = "+this.data[new_id].img)
+        //site.trace("this.data[new_id].img = "+this.data[new_id].img)
         var new_content = new Image();  
         new_content.id = new_id;
         new_content.onload = function () {   
@@ -163,7 +163,7 @@ site.news = {
 
             var new_id = this.news_set[i];
 
-            site.trace("this.data[new_id].ext_link = "+this.data[new_id].ext_link)
+            //site.trace("this.data[new_id].ext_link = "+this.data[new_id].ext_link)
 
             if(this.data[new_id].ext_link != "") {
                 $('#news_holder').append('<a href="'+this.data[new_id].ext_link+'" entry_id="'+this.data[new_id].id+'" target="_blank"><div class="news_entry" id="'+this.data[new_id].id+'"></div></a>');  
@@ -173,7 +173,7 @@ site.news = {
             
             var img_url = this.data[new_id].img['sizes']['news-thumb'];
 
-            site.trace("this.data[new_id].img = "+this.data[new_id].img)
+            //site.trace("this.data[new_id].img = "+this.data[new_id].img)
 
             var new_content = new Image();  
             new_content.id = new_id;
@@ -220,13 +220,13 @@ site.news = {
                 entry_id = this.news_set[this.news_set.length-1];
             }
 
-            site.trace("thumb_loaded --------  this.data[entry_id].id = "+this.data[entry_id].id+" entry_l = "+entry_l+" entry_id = "+entry_id)
+            //site.trace("thumb_loaded --------  this.data[entry_id].id = "+this.data[entry_id].id+" entry_l = "+entry_l+" entry_id = "+entry_id)
             TweenMax.to($('#'+this.data[entry_id].id), .5, {left:entry_l+"px", opacity:0, onCompleteScope:this, onComplete:this.remove_entry, onCompleteParams:[this.data[entry_id].id], ease:"Power1.easeInOut", overwrite:2}); 
 
 
             if(this.direction == "right") {
                 this.news_set.splice(0,1);
-                site.trace("this.news_set.length = "+this.news_set.length)
+                //site.trace("this.news_set.length = "+this.news_set.length)
                 
             } else {
                 this.news_set.pop();
@@ -238,14 +238,12 @@ site.news = {
     },
 
     remove_entry : function (id) {
-        site.trace("remove_entry id = "+id)
+        //site.trace("remove_entry id = "+id)
 
         $( "#news_holder a" ).each(function( index ) {
 
-
-            
             var entry_id = $(this).attr('entry_id');
-            site.trace("entry_id = "+entry_id +" id = "+id)
+            //site.trace("entry_id = "+entry_id +" id = "+id)
 
             if(entry_id == id) $(this).remove();
         });

@@ -84,7 +84,7 @@ site.nav = {
             }); 
 
         site.trace("site.segments[1] = "+site.segments[1])
-        if(site.segments[1] != undefined && site.segments[1] != "") site.scroll_to('#'+site.segments[1]);
+        if(site.segments[1] != undefined && site.segments[1] != "") TweenMax.delayedCall(1, site.scroll_to, ['#'+site.segments[1]], this);
         
         this.resize();
 
@@ -127,8 +127,9 @@ site.nav = {
 
         site.trace("btn_set_url id = "+id)
         if(id == "") id = 'header';
-        
-        site.scroll_to('#'+id);
+
+        TweenMax.delayedCall(.5, site.scroll_to, ['#'+id], this);
+
         if(id == "header") id = '';
         site.set_url(id)
     },

@@ -160,5 +160,13 @@ nav {
 	width: 100%;
 	height:auto;
 }
+#nav_spacer {
+	height: 12rem;
+}
 
+@media (min-width: 900px) { 
+	#nav_spacer {
+		height: 10rem;
+	}
+}
 
